@@ -1,0 +1,67 @@
+{
+  "collection": "peliculas_thriller",
+  "version": "1.0",
+  "description": "Colección de películas de suspenso y thriller recomendadas",
+  "items": [
+    {
+      "id": "movie_001",
+      "title": "Noche de thriller psicológico: Shutter Island",
+      "categories": ["pelicula", "casa"],
+      "subcategories": ["thriller", "psicológico"],
+      "tags": ["atmósfera", "misterio", "giro-inesperado"],
+      "durationMin": 138,
+      "energy": 2,
+      "emotionalIntensity": 4,
+      "cost": 0,
+      "notes": "Preparar palomitas. Mejor de noche con luces apagadas."
+    },
+    {
+      "id": "movie_002",
+      "title": "Maratón de suspense: Gone Girl",
+      "categories": ["pelicula", "casa"],
+      "subcategories": ["thriller", "drama"],
+      "tags": ["misterio", "atmósfera", "complejo"],
+      "durationMin": 149,
+      "energy": 2,
+      "emotionalIntensity": 4,
+      "cost": 0,
+      "notes": "Film que genera mucha conversación después. Ideal para seguir platicando."
+    },
+    {
+      "id": "movie_003",
+      "title": "Cine de culto: Memento",
+      "categories": ["pelicula", "casa"],
+      "subcategories": ["thriller", "culto"],
+      "tags": ["complejo", "misterio", "único"],
+      "durationMin": 113,
+      "energy": 2,
+      "emotionalIntensity": 3,
+      "cost": 0,
+      "notes": "Narrativa no lineal. Requiere atención pero vale la pena."
+    },
+    {
+      "id": "movie_004",
+      "title": "Suspenso moderno: Parasite",
+      "categories": ["pelicula", "casa"],
+      "subcategories": ["thriller", "drama"],
+      "tags": ["atmósfera", "social", "impactante"],
+      "durationMin": 132,
+      "energy": 2,
+      "emotionalIntensity": 4,
+      "cost": 0,
+      "notes": "Película con subtítulos pero increíblemente envolvente."
+    },
+    {
+      "id": "movie_005",
+      "title": "Thriller de acción: The Bourne Identity",
+      "categories": ["pelicula", "casa"],
+      "subcategories": ["thriller", "acción"],
+      "tags": ["adrenalina", "acción", "entretenido"],
+      "durationMin": 119,
+      "energy": 3,
+      "emotionalIntensity": 3,
+      "cost": 0,
+      "notes": "Perfecto cuando quieren algo emocionante pero no demasiado pesado."
+    }
+  ]
+}
