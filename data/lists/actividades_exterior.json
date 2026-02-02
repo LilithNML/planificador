@@ -1,0 +1,127 @@
+{
+  "collection": "actividades_exterior",
+  "version": "1.0",
+  "description": "Actividades al aire libre para renovar energía de pareja",
+  "items": [
+    {
+      "id": "outdoor_001",
+      "title": "Caminata al atardecer",
+      "categories": ["exterior", "activo"],
+      "subcategories": ["naturaleza", "ejercicio"],
+      "tags": ["naturaleza", "conversación", "paz"],
+      "durationMin": 45,
+      "energy": 4,
+      "emotionalIntensity": 2,
+      "cost": 0,
+      "notes": "Salir 1h antes del atardecer. El movimiento y naturaleza reducen estrés."
+    },
+    {
+      "id": "outdoor_002",
+      "title": "Picnic improvisado en un parque",
+      "categories": ["exterior", "comida"],
+      "subcategories": ["naturaleza", "romántico"],
+      "tags": ["naturaleza", "comida", "conversación"],
+      "durationMin": 90,
+      "energy": 3,
+      "emotionalIntensity": 2,
+      "cost": 10,
+      "notes": "Comida simple pero rica. Cambiar de ambiente renueva energía."
+    },
+    {
+      "id": "outdoor_003",
+      "title": "Explorar un barrio desconocido",
+      "categories": ["exterior", "exploración"],
+      "subcategories": ["ciudad", "aventura"],
+      "tags": ["novedad", "caminar", "descubrir"],
+      "durationMin": 120,
+      "energy": 4,
+      "emotionalIntensity": 2,
+      "cost": 20,
+      "notes": "Sin plan específico. Lo nuevo estimula dopamina y crea conexión."
+    },
+    {
+      "id": "outdoor_004",
+      "title": "Visitar mercado local y probar comida",
+      "categories": ["exterior", "comida"],
+      "subcategories": ["gastronomía", "cultural"],
+      "tags": ["comida", "cultural", "novedad"],
+      "durationMin": 90,
+      "energy": 3,
+      "emotionalIntensity": 2,
+      "cost": 15,
+      "notes": "Compartir varios platillos. Experiencias sensoriales crean recuerdos fuertes."
+    },
+    {
+      "id": "outdoor_005",
+      "title": "Sesión de fotos divertida en la ciudad",
+      "categories": ["exterior", "creativo"],
+      "subcategories": ["fotografía", "juego"],
+      "tags": ["creativo", "reír", "recuerdos"],
+      "durationMin": 60,
+      "energy": 3,
+      "emotionalIntensity": 2,
+      "cost": 0,
+      "notes": "Retos fotográficos: recrear poses famosas, encontrar colores específicos."
+    },
+    {
+      "id": "outdoor_006",
+      "title": "Ir a un museo o galería pequeña",
+      "categories": ["exterior", "cultural"],
+      "subcategories": ["arte", "educativo"],
+      "tags": ["cultural", "conversación", "calma"],
+      "durationMin": 90,
+      "energy": 2,
+      "emotionalIntensity": 2,
+      "cost": 10,
+      "notes": "Elegir lugar no masivo. El arte genera conversaciones únicas."
+    },
+    {
+      "id": "outdoor_007",
+      "title": "Paseo en bicicleta por la ciudad",
+      "categories": ["exterior", "activo"],
+      "subcategories": ["ejercicio", "aventura"],
+      "tags": ["ejercicio", "libertad", "explorar"],
+      "durationMin": 75,
+      "energy": 5,
+      "emotionalIntensity": 2,
+      "cost": 5,
+      "notes": "Rentar si no tienen. El ejercicio moderado mejora el humor."
+    },
+    {
+      "id": "outdoor_008",
+      "title": "Buscar el mejor café de la ciudad",
+      "categories": ["exterior", "exploración"],
+      "subcategories": ["café", "gastronomía"],
+      "tags": ["comida", "conversación", "calma"],
+      "durationMin": 90,
+      "energy": 2,
+      "emotionalIntensity": 1,
+      "cost": 10,
+      "notes": "Hacer lista y visitar 2-3 lugares. Misión compartida crea equipo."
+    },
+    {
+      "id": "outdoor_009",
+      "title": "Ver amanecer desde lugar especial",
+      "categories": ["exterior", "romántico"],
+      "subcategories": ["naturaleza", "especial"],
+      "tags": ["naturaleza", "paz", "único"],
+      "durationMin": 60,
+      "energy": 3,
+      "emotionalIntensity": 3,
+      "cost": 5,
+      "notes": "Requiere madrugar pero la experiencia lo vale. Llevar café."
+    },
+    {
+      "id": "outdoor_010",
+      "title": "Clase de algo nuevo juntos (baile, cerámica, etc)",
+      "categories": ["exterior", "aprendizaje"],
+      "subcategories": ["clase", "novedad"],
+      "tags": ["aprender", "novedad", "equipo"],
+      "durationMin": 90,
+      "energy": 4,
+      "emotionalIntensity": 2,
+      "cost": 25,
+      "notes": "Ser principiantes juntos fortalece vínculo. Pueden reír de sus errores."
+    }
+  ]
+}
