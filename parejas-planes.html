@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planes Juntos</title>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/localforage@1.10.0/dist/localforage.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --warm-cream: #FFF8F0;
+            --soft-terracotta: #E89B7B;
+            --deep-terracotta: #D47456;
+            --warm-brown: #8B5A3C;
+            --deep-purple: #4A3B5C;
+            --soft-lavender: #B8A8C8;
+            --accent-coral: #FF9B85;
+            --text-dark: #2D2424;
+            --text-light: #6B5B5B;
+            --shadow-soft: rgba(232, 155, 123, 0.15);
+            --shadow-medium: rgba(74, 59, 92, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, var(--warm-cream) 0%, #FFF5EB 50%, var(--warm-cream) 100%);
+            color: var(--text-dark);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 80%, var(--soft-lavender) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, var(--soft-terracotta) 0%, transparent 50%);
+            opacity: 0.3;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        #root {
+            max-width: 100%;
+            margin: 0 auto;
+            min-height: 100vh;
+        }
+
+        .app-container {
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .app-header {
+            background: linear-gradient(135deg, var(--deep-purple) 0%, var(--warm-brown) 100%);
+            padding: 2rem 1.5rem 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 32px var(--shadow-medium);
+        }
+
+        .app-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .app-title {
+            font-family: 'Fraunces', serif;
+            font-size: clamp(2rem, 8vw, 3rem);
+            font-weight: 700;
+            color: var(--warm-cream);
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+            font-variation-settings: 'opsz' 144;
+            letter-spacing: -0.02em;
+        }
+
+        .app-subtitle {
+            font-size: 1rem;
+            color: rgba(255, 248, 240, 0.85);
+            font-weight: 400;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Privacy Notice */
+        .privacy-notice {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 0.75rem 1rem;
+            margin: 1rem 1.5rem;
+            border-radius: 12px;
+            font-size: 0.875rem;
+            color: var(--text-light);
+            text-align: center;
+            border: 1px solid rgba(232, 155, 123, 0.3);
+            box-shadow: 0 2px 8px var(--shadow-soft);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 2rem 1.5rem 4rem;
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        /* Section Styles */
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 24px;
+            padding: 2rem 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 24px var(--shadow-soft);
+            border: 1px solid rgba(232, 155, 123, 0.2);
+        }
+
+        .section-title {
+            font-family: 'Fraunces', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--deep-purple);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-icon {
+            font-size: 1.75rem;
+        }
+
+        /* Profile Selector */
+        .profile-selector {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-btn {
+            flex: 1;
+            padding: 1rem;
+            background: var(--warm-cream);
+            border: 2px solid var(--soft-terracotta);
+            border-radius: 16px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .profile-btn.active {
+            background: linear-gradient(135deg, var(--soft-terracotta) 0%, var(--deep-terracotta) 100%);
+            color: white;
+            border-color: var(--deep-terracotta);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px var(--shadow-soft);
+        }
+
+        .profile-btn:hover:not(.active) {
+            background: var(--soft-terracotta);
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        /* Context Controls */
+        .context-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .control-label {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .control-value {
+            font-size: 0.9rem;
+            color: var(--deep-terracotta);
+            font-weight: 700;
+        }
+
+        .slider-container {
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: linear-gradient(to right, 
+                var(--soft-lavender) 0%, 
+                var(--soft-terracotta) 50%, 
+                var(--deep-terracotta) 100%);
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+            cursor: pointer;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: white;
+            cursor: pointer;
+            border: 3px solid var(--deep-terracotta);
+            box-shadow: 0 2px 8px var(--shadow-medium);
+            transition: transform 0.2s;
+        }
+
+        .slider::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+        }
+
+        .slider::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: white;
+            cursor: pointer;
+            border: 3px solid var(--deep-terracotta);
+            box-shadow: 0 2px 8px var(--shadow-medium);
+            transition: transform 0.2s;
+        }
+
+        .slider::-moz-range-thumb:hover {
+            transform: scale(1.1);
+        }
+
+        /* Quick Buttons */
+        .quick-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 0.75rem;
+        }
+
+        .quick-btn {
+            padding: 0.75rem 1rem;
+            background: var(--warm-cream);
+            border: 2px solid var(--soft-terracotta);
+            border-radius: 12px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+        }
+
+        .quick-btn.active {
+            background: var(--soft-terracotta);
+            color: white;
+            border-color: var(--deep-terracotta);
+            transform: scale(1.05);
+        }
+
+        .quick-btn:hover:not(.active) {
+            background: rgba(232, 155, 123, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Main Action Button */
+        .main-action {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .generate-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 1.5rem 3rem;
+            background: linear-gradient(135deg, var(--deep-terracotta) 0%, var(--soft-terracotta) 100%);
+            color: white;
+            border: none;
+            border-radius: 100px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            font-family: 'Fraunces', serif;
+            cursor: pointer;
+            box-shadow: 0 8px 24px var(--shadow-soft);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .generate-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .generate-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .generate-btn:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 12px 36px var(--shadow-medium);
+        }
+
+        .generate-btn:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        .btn-icon {
+            font-size: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-text {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Plan Card */
+        .plan-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 248, 240, 0.98) 100%);
+            border-radius: 24px;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: 0 8px 32px var(--shadow-medium);
+            border: 2px solid var(--soft-terracotta);
+            animation: slideUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .plan-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid rgba(232, 155, 123, 0.3);
+        }
+
+        .plan-title {
+            font-family: 'Fraunces', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--deep-purple);
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .plan-meta {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .plan-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .plan-reason {
+            background: rgba(232, 155, 123, 0.1);
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            color: var(--text-dark);
+            border-left: 4px solid var(--soft-terracotta);
+        }
+
+        .plan-steps {
+            margin-bottom: 2rem;
+        }
+
+        .plan-step {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            flex-shrink: 0;
+            width: 32px;
+            height: 32px;
+            background: var(--soft-terracotta);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .step-content {
+            flex: 1;
+            padding-top: 0.25rem;
+        }
+
+        .plan-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .plan-action-btn {
+            padding: 1rem;
+            border: 2px solid;
+            border-radius: 16px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-accept {
+            background: var(--deep-terracotta);
+            color: white;
+            border-color: var(--deep-terracotta);
+        }
+
+        .btn-accept:hover {
+            background: var(--warm-brown);
+            border-color: var(--warm-brown);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px var(--shadow-soft);
+        }
+
+        .btn-regenerate {
+            background: white;
+            color: var(--deep-purple);
+            border-color: var(--deep-purple);
+        }
+
+        .btn-regenerate:hover {
+            background: var(--deep-purple);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Onboarding */
+        .onboarding-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(74, 59, 92, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 1.5rem;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .onboarding-card {
+            background: var(--warm-cream);
+            border-radius: 24px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 16px 64px rgba(0, 0, 0, 0.4);
+            animation: scaleIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .onboarding-title {
+            font-family: 'Fraunces', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--deep-purple);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .onboarding-text {
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .text-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--soft-terracotta);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: 'DM Sans', sans-serif;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        .text-input:focus {
+            outline: none;
+            border-color: var(--deep-terracotta);
+            box-shadow: 0 0 0 3px rgba(232, 155, 123, 0.2);
+        }
+
+        .onboarding-btn {
+            width: 100%;
+            padding: 1.25rem;
+            background: linear-gradient(135deg, var(--deep-terracotta) 0%, var(--soft-terracotta) 100%);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            font-size: 1.125rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .onboarding-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px var(--shadow-medium);
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 3rem;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1.5rem;
+            border: 4px solid rgba(232, 155, 123, 0.3);
+            border-top-color: var(--deep-terracotta);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (min-width: 768px) {
+            .app-header {
+                padding: 3rem 2rem 4rem;
+            }
+
+            .main-content {
+                padding: 3rem 2rem 5rem;
+            }
+
+            .section {
+                padding: 2.5rem 2rem;
+            }
+
+            .plan-card {
+                padding: 3rem;
+            }
+
+            .plan-actions {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            #root {
+                max-width: 1200px;
+            }
+
+            .main-content {
+                max-width: 800px;
+            }
+        }
+
+        /* Utility */
+        .hidden {
+            display: none;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-1 { margin-top: 1rem; }
+        .mt-2 { margin-top: 2rem; }
+        .mb-1 { margin-bottom: 1rem; }
+        .mb-2 { margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useCallback } = React;
+
+        // Configuración de localForage
+        localforage.config({
+            name: 'PlanesJuntos',
+            storeName: 'data'
+        });
+
+        // ==================== DATOS DE EJEMPLO ====================
+        const SAMPLE_ACTIVITIES = [
+            {
+                id: "act_001",
+                title: "Ver una película de suspenso",
+                categories: ["casa", "entretenimiento"],
+                subcategories: ["película", "thriller"],
+                tags: ["atmósfera", "misterio", "noche"],
+                durationMin: 90,
+                energy: 2,
+                emotionalIntensity: 3,
+                cost: 0,
+                steps: [
+                    "Preparar palomitas y bebidas",
+                    "Crear ambiente: apagar luces, usar mantas",
+                    "Elegir película juntos (recomendaciones: Shutter Island, Gone Girl, Memento)"
+                ],
+                notes: "Perfecto para noches relajadas con ganas de emoción"
+            },
+            {
+                id: "act_002",
+                title: "Cocinar una receta nueva juntos",
+                categories: ["casa", "creativo"],
+                subcategories: ["cocina", "colaborativo"],
+                tags: ["creativo", "divertido", "comida"],
+                durationMin: 60,
+                energy: 3,
+                emotionalIntensity: 2,
+                cost: 15,
+                steps: [
+                    "Buscar una receta que ninguno haya hecho antes",
+                    "Ir juntos al mercado por ingredientes",
+                    "Cocinar colaborando: uno corta, otro cocina",
+                    "Disfrutar el resultado con buena música"
+                ],
+                notes: "Crear algo juntos fortalece la conexión"
+            },
+            {
+                id: "act_003",
+                title: "Caminata al atardecer",
+                categories: ["exterior", "activo"],
+                subcategories: ["naturaleza", "ejercicio"],
+                tags: ["naturaleza", "conversación", "paz"],
+                durationMin: 45,
+                energy: 4,
+                emotionalIntensity: 2,
+                cost: 0,
+                steps: [
+                    "Elegir ruta cercana con buena vista",
+                    "Salir 1 hora antes del atardecer",
+                    "Caminar sin prisa, conversar",
+                    "Encontrar un lugar para ver el atardecer juntos"
+                ],
+                notes: "El movimiento y la naturaleza reducen estrés"
+            },
+            {
+                id: "act_004",
+                title: "Sesión de juegos de mesa",
+                categories: ["casa", "entretenimiento"],
+                subcategories: ["juegos", "competitivo"],
+                tags: ["divertido", "reír", "competencia"],
+                durationMin: 60,
+                energy: 3,
+                emotionalIntensity: 2,
+                cost: 0,
+                steps: [
+                    "Elegir 2-3 juegos diferentes",
+                    "Preparar snacks y bebidas",
+                    "Jugar sin mirar el teléfono",
+                    "El perdedor prepara algo para el ganador"
+                ],
+                notes: "La competencia sana crea momentos memorables"
+            },
+            {
+                id: "act_005",
+                title: "Noche de música y baile en casa",
+                categories: ["casa", "activo"],
+                subcategories: ["música", "baile"],
+                tags: ["energía", "reír", "movimiento"],
+                durationMin: 30,
+                energy: 5,
+                emotionalIntensity: 3,
+                cost: 0,
+                steps: [
+                    "Crear playlist colaborativa con canciones favoritas",
+                    "Despejar espacio en la sala",
+                    "Bailar sin pena, probar pasos nuevos",
+                    "Terminar con una canción lenta"
+                ],
+                notes: "El baile libera endorfinas y conecta físicamente"
+            },
+            {
+                id: "act_006",
+                title: "Picnic improvisado en un parque",
+                categories: ["exterior", "comida"],
+                subcategories: ["naturaleza", "romántico"],
+                tags: ["naturaleza", "comida", "conversación"],
+                durationMin: 90,
+                energy: 3,
+                emotionalIntensity: 2,
+                cost: 10,
+                steps: [
+                    "Preparar comida simple: sándwiches, frutas, quesos",
+                    "Llevar manta y algo para beber",
+                    "Encontrar un lugar tranquilo en el parque",
+                    "Comer sin prisa, observar alrededor"
+                ],
+                notes: "Cambiar de ambiente renueva la energía de pareja"
+            },
+            {
+                id: "act_007",
+                title: "Crear arte juntos",
+                categories: ["casa", "creativo"],
+                subcategories: ["arte", "colaborativo"],
+                tags: ["creativo", "expresión", "único"],
+                durationMin: 60,
+                energy: 2,
+                emotionalIntensity: 2,
+                cost: 5,
+                steps: [
+                    "Conseguir materiales: papel, colores, pinturas",
+                    "Cada uno empieza un dibujo/pintura",
+                    "A mitad camino, intercambiar y completar el del otro",
+                    "Colgar el resultado en casa"
+                ],
+                notes: "Crear juntos crea recuerdos tangibles"
+            },
+            {
+                id: "act_008",
+                title: "Explorar un barrio desconocido",
+                categories: ["exterior", "exploración"],
+                subcategories: ["ciudad", "aventura"],
+                tags: ["novedad", "caminar", "descubrir"],
+                durationMin: 120,
+                energy: 4,
+                emotionalIntensity: 2,
+                cost: 20,
+                steps: [
+                    "Elegir un barrio que ninguno conoce bien",
+                    "Ir sin plan específico, dejarse sorprender",
+                    "Entrar a tiendas interesantes, probar café local",
+                    "Documentar momentos con fotos"
+                ],
+                notes: "Lo nuevo estimula dopamina y crea conexión"
+            },
+            {
+                id: "act_009",
+                title: "Sesión de masajes relajantes",
+                categories: ["casa", "bienestar"],
+                subcategories: ["relax", "físico"],
+                tags: ["conexión", "relax", "cuidado"],
+                durationMin: 45,
+                energy: 1,
+                emotionalIntensity: 3,
+                cost: 0,
+                steps: [
+                    "Preparar ambiente: música suave, velas, aceite",
+                    "Turnarse: 15 minutos cada uno",
+                    "Masajear espalda, cuello, pies sin prisa",
+                    "Terminar con abrazo largo"
+                ],
+                notes: "El tacto libera oxitocina, hormona del vínculo"
+            },
+            {
+                id: "act_010",
+                title: "Maratón de videos graciosos",
+                categories: ["casa", "entretenimiento"],
+                subcategories: ["comedia", "digital"],
+                tags: ["reír", "ligero", "desconectar"],
+                durationMin: 60,
+                energy: 1,
+                emotionalIntensity: 1,
+                cost: 0,
+                steps: [
+                    "Cada uno elige 5 videos que le dan risa",
+                    "Preparar snacks favoritos",
+                    "Ver alternando elecciones",
+                    "Comentar cuáles fueron los mejores"
+                ],
+                notes: "Reír juntos fortalece el vínculo más que cualquier actividad seria"
+            }
+        ];
+
+        // ==================== COMPONENTE PRINCIPAL ====================
+        function App() {
+            const [showOnboarding, setShowOnboarding] = useState(false);
+            const [profiles, setProfiles] = useState({ personA: null, personB: null });
+            const [currentProfile, setCurrentProfile] = useState('personA');
+            const [context, setContext] = useState({
+                mood: 3,
+                energy: 3,
+                connection: 'conectar',
+                duration: 60,
+                budget: 10
+            });
+            const [generatedPlan, setGeneratedPlan] = useState(null);
+            const [isGenerating, setIsGenerating] = useState(false);
+            const [history, setHistory] = useState([]);
+
+            // Cargar datos al inicio
+            useEffect(() => {
+                loadData();
+            }, []);
+
+            const loadData = async () => {
+                try {
+                    const savedProfiles = await localforage.getItem('profiles');
+                    const savedHistory = await localforage.getItem('history');
+                    
+                    if (!savedProfiles || !savedProfiles.personA || !savedProfiles.personB) {
+                        setShowOnboarding(true);
+                    } else {
+                        setProfiles(savedProfiles);
+                    }
+                    
+                    if (savedHistory) {
+                        setHistory(savedHistory);
+                    }
+                } catch (error) {
+                    console.error('Error cargando datos:', error);
+                    setShowOnboarding(true);
+                }
+            };
+
+            const saveProfiles = async (newProfiles) => {
+                try {
+                    await localforage.setItem('profiles', newProfiles);
+                    setProfiles(newProfiles);
+                } catch (error) {
+                    console.error('Error guardando perfiles:', error);
+                }
+            };
+
+            const saveHistory = async (newHistory) => {
+                try {
+                    await localforage.setItem('history', newHistory);
+                    setHistory(newHistory);
+                } catch (error) {
+                    console.error('Error guardando historial:', error);
+                }
+            };
+
+            const generatePlan = useCallback(() => {
+                setIsGenerating(true);
+                
+                // Simular procesamiento
+                setTimeout(() => {
+                    const plan = selectPlan();
+                    setGeneratedPlan(plan);
+                    setIsGenerating(false);
+                }, 1500);
+            }, [context, history]);
+
+            const selectPlan = () => {
+                // Filtrar por duración
+                let candidates = SAMPLE_ACTIVITIES.filter(
+                    act => act.durationMin <= context.duration + 15
+                );
+
+                // Filtrar por energía
+                candidates = candidates.filter(
+                    act => act.energy <= context.energy + 1
+                );
+
+                // Evitar repeticiones recientes
+                const recentIds = history.slice(-3).map(h => h.activityId);
+                candidates = candidates.filter(act => !recentIds.includes(act.id));
+
+                // Si no hay candidatos, usar todos
+                if (candidates.length === 0) {
+                    candidates = SAMPLE_ACTIVITIES;
+                }
+
+                // Scoring simple
+                candidates = candidates.map(act => {
+                    let score = Math.random() * 100;
+                    
+                    // Bonus por mood match
+                    if (context.connection === 'reír' && act.tags.includes('reír')) {
+                        score += 30;
+                    }
+                    if (context.connection === 'conectar' && act.emotionalIntensity >= 2) {
+                        score += 20;
+                    }
+                    if (context.connection === 'desconectar' && act.energy <= 2) {
+                        score += 25;
+                    }
+                    
+                    // Bonus por presupuesto
+                    if (act.cost <= context.budget) {
+                        score += 15;
+                    }
+                    
+                    return { ...act, score };
+                });
+
+                // Ordenar y elegir
+                candidates.sort((a, b) => b.score - a.score);
+                
+                // 70% top, 20% medio, 10% exploración
+                const rand = Math.random();
+                let selected;
+                if (rand < 0.7) {
+                    selected = candidates[0];
+                } else if (rand < 0.9) {
+                    selected = candidates[Math.floor(candidates.length * 0.5)] || candidates[0];
+                } else {
+                    selected = candidates[candidates.length - 1] || candidates[0];
+                }
+
+                // Generar razón
+                const reasons = [
+                    "Esta actividad coincide perfecto con su energía actual",
+                    "Basado en lo que disfrutan, esto puede crear un momento especial",
+                    "El tiempo disponible es ideal para esta experiencia",
+                    "Esta opción equilibra comodidad con novedad",
+                    "Perfecto para el estado de ánimo de hoy"
+                ];
+
+                return {
+                    ...selected,
+                    reason: reasons[Math.floor(Math.random() * reasons.length)]
+                };
+            };
+
+            const handleAcceptPlan = () => {
+                const newHistoryEntry = {
+                    activityId: generatedPlan.id,
+                    date: new Date().toISOString(),
+                    accepted: true,
+                    rating: null
+                };
+                
+                const newHistory = [...history, newHistoryEntry];
+                saveHistory(newHistory);
+                
+                alert('¡Genial! Disfruten su plan juntos 💕');
+                setGeneratedPlan(null);
+            };
+
+            const handleRegeneratePlan = () => {
+                setGeneratedPlan(null);
+                generatePlan();
+            };
+
+            return (
+                <div className="app-container">
+                    {showOnboarding && (
+                        <OnboardingFlow 
+                            onComplete={(newProfiles) => {
+                                saveProfiles(newProfiles);
+                                setShowOnboarding(false);
+                            }}
+                        />
+                    )}
+
+                    <header className="app-header">
+                        <h1 className="app-title">Planes Juntos</h1>
+                        <p className="app-subtitle">Dejen que decidamos por ustedes</p>
+                    </header>
+
+                    <div className="privacy-notice">
+                        🔒 Tus datos se quedan en este dispositivo. Privacidad total.
+                    </div>
+
+                    <main className="main-content">
+                        {profiles.personA && profiles.personB && (
+                            <>
+                                <section className="section">
+                                    <h2 className="section-title">
+                                        <span className="section-icon">👥</span>
+                                        ¿Quién está aquí?
+                                    </h2>
+                                    <div className="profile-selector">
+                                        <button 
+                                            className={`profile-btn ${currentProfile === 'personA' ? 'active' : ''}`}
+                                            onClick={() => setCurrentProfile('personA')}
+                                        >
+                                            {profiles.personA}
+                                        </button>
+                                        <button 
+                                            className={`profile-btn ${currentProfile === 'personB' ? 'active' : ''}`}
+                                            onClick={() => setCurrentProfile('personB')}
+                                        >
+                                            {profiles.personB}
+                                        </button>
+                                    </div>
+                                </section>
+
+                                <section className="section">
+                                    <h2 className="section-title">
+                                        <span className="section-icon">🎭</span>
+                                        ¿Cómo están hoy?
+                                    </h2>
+                                    <div className="context-grid">
+                                        <div className="control-group">
+                                            <label className="control-label">
+                                                Estado de ánimo
+                                                <span className="control-value">
+                                                    {context.mood === 1 ? 'Bajo' : context.mood === 2 ? 'Tranquilo' : context.mood === 3 ? 'Normal' : context.mood === 4 ? 'Bien' : 'Excelente'}
+                                                </span>
+                                            </label>
+                                            <div className="slider-container">
+                                                <input 
+                                                    type="range" 
+                                                    min="1" 
+                                                    max="5" 
+                                                    value={context.mood}
+                                                    onChange={(e) => setContext({...context, mood: parseInt(e.target.value)})}
+                                                    className="slider"
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div className="control-group">
+                                            <label className="control-label">
+                                                Nivel de energía
+                                                <span className="control-value">
+                                                    {context.energy === 1 ? 'Muy bajo' : context.energy === 2 ? 'Bajo' : context.energy === 3 ? 'Medio' : context.energy === 4 ? 'Alto' : 'Muy alto'}
+                                                </span>
+                                            </label>
+                                            <div className="slider-container">
+                                                <input 
+                                                    type="range" 
+                                                    min="1" 
+                                                    max="5" 
+                                                    value={context.energy}
+                                                    onChange={(e) => setContext({...context, energy: parseInt(e.target.value)})}
+                                                    className="slider"
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div className="control-group">
+                                            <label className="control-label">¿Qué buscan?</label>
+                                            <div className="quick-buttons">
+                                                <button 
+                                                    className={`quick-btn ${context.connection === 'reír' ? 'active' : ''}`}
+                                                    onClick={() => setContext({...context, connection: 'reír'})}
+                                                >
+                                                    😂 Reír
+                                                </button>
+                                                <button 
+                                                    className={`quick-btn ${context.connection === 'conectar' ? 'active' : ''}`}
+                                                    onClick={() => setContext({...context, connection: 'conectar'})}
+                                                >
+                                                    💕 Conectar
+                                                </button>
+                                                <button 
+                                                    className={`quick-btn ${context.connection === 'desconectar' ? 'active' : ''}`}
+                                                    onClick={() => setContext({...context, connection: 'desconectar'})}
+                                                >
+                                                    🧘 Desconectar
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <div className="control-group">
+                                            <label className="control-label">
+                                                Tiempo disponible
+                                                <span className="control-value">{context.duration} min</span>
+                                            </label>
+                                            <div className="slider-container">
+                                                <input 
+                                                    type="range" 
+                                                    min="30" 
+                                                    max="240" 
+                                                    step="15"
+                                                    value={context.duration}
+                                                    onChange={(e) => setContext({...context, duration: parseInt(e.target.value)})}
+                                                    className="slider"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <div className="main-action">
+                                    <button 
+                                        className="generate-btn"
+                                        onClick={generatePlan}
+                                        disabled={isGenerating}
+                                    >
+                                        <span className="btn-icon">✨</span>
+                                        <span className="btn-text">Hazlo por nosotros</span>
+                                    </button>
+                                </div>
+
+                                {isGenerating && (
+                                    <div className="loading">
+                                        <div className="spinner"></div>
+                                        <p>Pensando en el plan perfecto...</p>
+                                    </div>
+                                )}
+
+                                {generatedPlan && !isGenerating && (
+                                    <PlanCard 
+                                        plan={generatedPlan}
+                                        onAccept={handleAcceptPlan}
+                                        onRegenerate={handleRegeneratePlan}
+                                    />
+                                )}
+                            </>
+                        )}
+                    </main>
+                </div>
+            );
+        }
+
+        // ==================== COMPONENTE: ONBOARDING ====================
+        function OnboardingFlow({ onComplete }) {
+            const [personA, setPersonA] = useState('');
+            const [personB, setPersonB] = useState('');
+
+            const handleSubmit = () => {
+                if (personA.trim() && personB.trim()) {
+                    onComplete({
+                        personA: personA.trim(),
+                        personB: personB.trim()
+                    });
+                }
+            };
+
+            return (
+                <div className="onboarding-overlay">
+                    <div className="onboarding-card">
+                        <h2 className="onboarding-title">¡Bienvenidos! 👋</h2>
+                        <p className="onboarding-text">
+                            Vamos a crear momentos especiales juntos. Solo necesitamos saber cómo llamarlos.
+                        </p>
+
+                        <div className="input-group">
+                            <label className="input-label">Primera persona</label>
+                            <input 
+                                type="text"
+                                className="text-input"
+                                placeholder="Ej: Alex"
+                                value={personA}
+                                onChange={(e) => setPersonA(e.target.value)}
+                                maxLength={20}
+                            />
+                        </div>
+
+                        <div className="input-group">
+                            <label className="input-label">Segunda persona</label>
+                            <input 
+                                type="text"
+                                className="text-input"
+                                placeholder="Ej: Sam"
+                                value={personB}
+                                onChange={(e) => setPersonB(e.target.value)}
+                                maxLength={20}
+                            />
+                        </div>
+
+                        <button 
+                            className="onboarding-btn"
+                            onClick={handleSubmit}
+                            disabled={!personA.trim() || !personB.trim()}
+                        >
+                            Comenzar
+                        </button>
+                    </div>
+                </div>
+            );
+        }
+
+        // ==================== COMPONENTE: PLAN CARD ====================
+        function PlanCard({ plan, onAccept, onRegenerate }) {
+            return (
+                <div className="plan-card">
+                    <div className="plan-header">
+                        <h3 className="plan-title">{plan.title}</h3>
+                        <div className="plan-meta">
+                            <span className="plan-meta-item">
+                                ⏱️ {plan.durationMin} min
+                            </span>
+                            <span className="plan-meta-item">
+                                ⚡ Energía: {plan.energy}/5
+                            </span>
+                            {plan.cost > 0 && (
+                                <span className="plan-meta-item">
+                                    💰 ${plan.cost}
+                                </span>
+                            )}
+                        </div>
+                    </div>
+
+                    <div className="plan-reason">
+                        <strong>¿Por qué esto?</strong> {plan.reason}
+                    </div>
+
+                    <div className="plan-steps">
+                        <h4 style={{marginBottom: '1rem', color: 'var(--deep-purple)'}}>
+                            Cómo hacerlo:
+                        </h4>
+                        {plan.steps.map((step, index) => (
+                            <div key={index} className="plan-step">
+                                <div className="step-number">{index + 1}</div>
+                                <div className="step-content">{step}</div>
+                            </div>
+                        ))}
+                    </div>
+
+                    {plan.notes && (
+                        <div style={{
+                            background: 'rgba(184, 168, 200, 0.15)',
+                            padding: '1rem',
+                            borderRadius: '12px',
+                            fontSize: '0.9rem',
+                            color: 'var(--text-light)',
+                            marginBottom: '1.5rem'
+                        }}>
+                            💡 <strong>Nota:</strong> {plan.notes}
+                        </div>
+                    )}
+
+                    <div className="plan-actions">
+                        <button className="plan-action-btn btn-accept" onClick={onAccept}>
+                            ✓ ¡Hagámoslo!
+                        </button>
+                        <button className="plan-action-btn btn-regenerate" onClick={onRegenerate}>
+                            🔄 Otra opción
+                        </button>
+                    </div>
+                </div>
+            );
+        }
+
+        // ==================== RENDER ====================
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
