@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Generador de planes personalizados para parejas - Experiencias únicas adaptadas a ustedes">
+    <title>Generador de Planes</title>
+    <link rel="stylesheet" href="src/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&family=Commissioner:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <h1 class="logo">
+                <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                </svg>
+                <span>Planes</span>
+            </h1>
+            <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+                <svg class="theme-icon sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"/>
+                    <line x1="12" y1="1" x2="12" y2="3"/>
+                    <line x1="12" y1="21" x2="12" y2="23"/>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                    <line x1="1" y1="12" x2="3" y2="12"/>
+                    <line x1="21" y1="12" x2="23" y2="12"/>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                </svg>
+                <svg class="theme-icon moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content" id="app">
+        <!-- Generator View -->
+        <section class="generator-view" id="generatorView">
+            <div class="container">
+                <div class="intro">
+                    <h2 class="intro-title">¿Qué quieren hacer hoy?</h2>
+                    <p class="intro-subtitle">Díganme cómo se sienten y yo les armo el plan perfecto</p>
+                </div>
+
+                <form class="generator-form" id="generatorForm">
+                    <!-- Quick Mood -->
+                    <div class="form-section mood-section">
+                        <h3 class="section-title">¿Cómo están hoy?</h3>
+                        <div class="mood-grid">
+                            <button type="button" class="mood-btn" data-mood="tired">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M8 15h8"/>
+                                    <line x1="9" y1="9" x2="9.01" y2="9"/>
+                                    <line x1="15" y1="9" x2="15.01" y2="9"/>
+                                </svg>
+                                <span>Cansados</span>
+                            </button>
+                            <button type="button" class="mood-btn" data-mood="energetic">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                                <span>Con energía</span>
+                            </button>
+                            <button type="button" class="mood-btn" data-mood="calm">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+                                    <line x1="9" y1="9" x2="9.01" y2="9"/>
+                                    <line x1="15" y1="9" x2="15.01" y2="9"/>
+                                </svg>
+                                <span>Tranquilos</span>
+                            </button>
+                            <button type="button" class="mood-btn" data-mood="fun">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+                                    <line x1="9" y1="9" x2="9.01" y2="9"/>
+                                    <line x1="15" y1="9" x2="15.01" y2="9"/>
+                                </svg>
+                                <span>Con ganas de reír</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Duration -->
+                    <div class="form-section">
+                        <label class="section-title" for="duration">
+                            ¿Cuánto tiempo tienen?
+                            <span class="duration-display">60 min</span>
+                        </label>
+                        <div class="slider-container">
+                            <input type="range" id="duration" name="duration" 
+                                   min="15" max="300" step="15" value="60" 
+                                   class="slider duration-slider">
+                            <div class="slider-marks">
+                                <span>15min</span>
+                                <span>1h</span>
+                                <span>2h</span>
+                                <span>5h</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Surprise Level -->
+                    <div class="form-section">
+                        <label class="section-title" for="surprise">
+                            Nivel de sorpresa
+                            <span class="surprise-display">Balanceado</span>
+                        </label>
+                        <div class="slider-container">
+                            <input type="range" id="surprise" name="surprise" 
+                                   min="0" max="100" step="10" value="30" 
+                                   class="slider surprise-slider">
+                            <div class="slider-marks">
+                                <span>Lo de siempre</span>
+                                <span>Aventura total</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Participant Weights -->
+                    <div class="form-section">
+                        <h3 class="section-title">¿De quién son las preferencias hoy?</h3>
+                        <div class="weights-container">
+                            <div class="weight-control">
+                                <label for="weightLilith">Lilith</label>
+                                <input type="range" id="weightLilith" name="weightLilith" 
+                                       min="0" max="100" step="10" value="50" 
+                                       class="slider weight-slider">
+                                <span class="weight-value">50%</span>
+                            </div>
+                            <div class="weight-control">
+                                <label for="weightHaziel">Haziel</label>
+                                <input type="range" id="weightHaziel" name="weightHaziel" 
+                                       min="0" max="100" step="10" value="50" 
+                                       class="slider weight-slider">
+                                <span class="weight-value">50%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Filters -->
+                    <details class="form-section filters-section">
+                        <summary class="section-title">Filtros opcionales</summary>
+                        <div class="filters-grid">
+                            <div class="filter-group">
+                                <label>Ubicación</label>
+                                <div class="chip-group">
+                                    <label class="chip">
+                                        <input type="checkbox" name="location" value="indoor">
+                                        <span>Interior</span>
+                                    </label>
+                                    <label class="chip">
+                                        <input type="checkbox" name="location" value="outdoor">
+                                        <span>Exterior</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="filter-group">
+                                <label>Intensidad</label>
+                                <div class="chip-group">
+                                    <label class="chip">
+                                        <input type="checkbox" name="intensity" value="0">
+                                        <span>Bajo</span>
+                                    </label>
+                                    <label class="chip">
+                                        <input type="checkbox" name="intensity" value="1">
+                                        <span>Medio</span>
+                                    </label>
+                                    <label class="chip">
+                                        <input type="checkbox" name="intensity" value="2">
+                                        <span>Alto</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="filter-group">
+                                <label>Costo</label>
+                                <div class="chip-group">
+                                    <label class="chip">
+                                        <input type="checkbox" name="cost" value="free">
+                                        <span>Gratis</span>
+                                    </label>
+                                    <label class="chip">
+                                        <input type="checkbox" name="cost" value="paid">
+                                        <span>De pago</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </details>
+
+                    <!-- CTA Buttons -->
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary btn-large" id="generateBtn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                            Generar plan
+                        </button>
+                        <button type="button" class="btn btn-ghost" id="surpriseBtn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2a10 10 0 1 0 0 20 10 10 0 1 0 0-20z"/>
+                                <path d="M12 6v6l4 2"/>
+                            </svg>
+                            Hazlo por nosotros
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Plan View -->
+        <section class="plan-view hidden" id="planView">
+            <div class="container">
+                <div class="plan-header">
+                    <button class="btn btn-ghost btn-back" id="backBtn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        </svg>
+                        Volver
+                    </button>
+                    <div class="plan-meta">
+                        <h2 class="plan-title" id="planTitle">Su plan de hoy</h2>
+                        <p class="plan-reasoning" id="planReasoning"></p>
+                    </div>
+                    <div class="plan-actions">
+                        <button class="btn btn-ghost" id="shareBtn" aria-label="Compartir plan">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="18" cy="5" r="3"/>
+                                <circle cx="6" cy="12" r="3"/>
+                                <circle cx="18" cy="19" r="3"/>
+                                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+                                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+                            </svg>
+                        </button>
+                        <button class="btn btn-ghost" id="exportBtn" aria-label="Exportar a calendario">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                <line x1="16" y1="2" x2="16" y2="6"/>
+                                <line x1="8" y1="2" x2="8" y2="6"/>
+                                <line x1="3" y1="10" x2="21" y2="10"/>
+                            </svg>
+                        </button>
+                        <button class="btn btn-primary" id="regenerateBtn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
+                            </svg>
+                            Otro plan
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Checklist Modal -->
+                <div class="checklist-modal" id="checklistModal">
+                    <div class="checklist-content">
+                        <h3>Antes de empezar, necesitan:</h3>
+                        <ul id="checklistItems"></ul>
+                        <button class="btn btn-primary" id="startPlanBtn">¡Listo, empecemos!</button>
+                    </div>
+                </div>
+
+                <!-- Timeline -->
+                <div class="timeline" id="timeline"></div>
+
+                <!-- Overall Feedback -->
+                <div class="plan-feedback">
+                    <h3>¿Qué tal estuvo el plan?</h3>
+                    <div class="feedback-buttons">
+                        <button class="btn btn-feedback" data-rating="love" aria-label="Me encantó">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                            </svg>
+                            Me encantó
+                        </button>
+                        <button class="btn btn-feedback" data-rating="good" aria-label="Estuvo bien">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/>
+                            </svg>
+                            Estuvo bien
+                        </button>
+                        <button class="btn btn-feedback" data-rating="bad" aria-label="No me gustó">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"/>
+                            </svg>
+                            No me gustó
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Loading State -->
+        <div class="loading-overlay hidden" id="loadingOverlay">
+            <div class="loading-spinner"></div>
+            <p>Armando su plan perfecto...</p>
+        </div>
+
+        <!-- Toast Notifications -->
+        <div class="toast-container" id="toastContainer"></div>
+    </main>
+
+    <!-- Scripts -->
+    <script type="module" src="src/js/main.js"></script>
+</body>
+</html>
