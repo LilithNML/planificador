@@ -1,0 +1,38 @@
+{
+  "user_id": "lilith",
+  "display_name": "Lilith",
+  "inferred_tags": {
+    "anime": 0.9,
+    "gaming": 0.7,
+    "reading": 0.8,
+    "art": 0.6,
+    "creative": 0.7,
+    "indoor": 0.8,
+    "calm": 0.7,
+    "intellectual": 0.8
+  },
+  "explicit_likes": [
+    "Anime",
+    "Manga",
+    "Videojuegos narrativos",
+    "Lectura",
+    "Arte digital",
+    "Música tranquila"
+  ],
+  "explicit_dislikes": [
+    "Mucho ruido",
+    "Multitudes grandes",
+    "Deportes extremos"
+  ],
+  "energy_profile": {
+    "morning": 0.6,
+    "afternoon": 0.8,
+    "evening": 0.9,
+    "night": 0.7
+  },
+  "preferences": {
+    "preferred_intensity": [0, 1],
+    "preferred_location": "indoor",
+    "social_preference": "intimate"
+  }
+}
