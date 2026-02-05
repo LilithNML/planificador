@@ -1,0 +1,12 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2026-02-05",
+  "files": [
+    "activities_core.json",
+    "activities_outdoors.json"
+  ],
+  "categories": {
+    "core": "Actividades principales de interior y entretenimiento",
+    "outdoors": "Actividades al aire libre y exteriores"
+  }
+}
