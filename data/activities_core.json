@@ -1,0 +1,285 @@
+[
+  {
+    "id": "act_001",
+    "title": "Ver un episodio de anime",
+    "description": "Elige un anime que ambos quieran ver o continúen con su serie actual. Preparen snacks y pónganse cómodos.",
+    "tags": ["anime", "indoor", "passive", "entertainment", "relaxing"],
+    "min_duration_min": 20,
+    "max_duration_min": 45,
+    "intensity": 0,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["Pantalla", "Internet", "Auriculares opcionales"],
+    "suitability": {
+      "mood": ["tired", "calm", "fun"],
+      "time_of_day": ["evening", "night", "afternoon"]
+    },
+    "steps": [
+      "Elijan qué ver (nuevo episodio o re-watch de favorito)",
+      "Preparen algo para picar",
+      "Apaguen notificaciones del teléfono",
+      "Disfruten"
+    ],
+    "variations": [
+      {
+        "title": "Maratón de 2-3 episodios",
+        "duration_adjustment": "+40-90 min"
+      }
+    ]
+  },
+  {
+    "id": "act_002",
+    "title": "Escuchar un podcast juntos",
+    "description": "Descubran historias fascinantes, ciencia, comedia o misterio mientras comparten el momento.",
+    "tags": ["podcast", "audio", "indoor", "passive", "learning", "relaxing"],
+    "min_duration_min": 20,
+    "max_duration_min": 60,
+    "intensity": 0,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["Auriculares o bocina", "Internet"],
+    "suitability": {
+      "mood": ["tired", "calm"],
+      "time_of_day": ["evening", "night", "afternoon"]
+    },
+    "steps": [
+      "Elijan un tema que les interese a ambos",
+      "Pónganse cómodos (en el sofá, en la cama, etc.)",
+      "Reproduzcan y escuchen juntos",
+      "Comenten lo que les llamó la atención"
+    ]
+  },
+  {
+    "id": "act_003",
+    "title": "Cocinar algo nuevo juntos",
+    "description": "Busquen una receta sencilla que no hayan probado y prepárenla en equipo.",
+    "tags": ["cooking", "creative", "indoor", "active", "skill-building"],
+    "min_duration_min": 30,
+    "max_duration_min": 90,
+    "intensity": 1,
+    "cost": 50,
+    "participants": 2,
+    "required_assets": ["Ingredientes", "Utensilios de cocina", "Receta (celular o impresa)"],
+    "suitability": {
+      "mood": ["energetic", "fun"],
+      "time_of_day": ["afternoon", "evening"]
+    },
+    "steps": [
+      "Busquen una receta que les llame la atención",
+      "Revisen que tengan los ingredientes",
+      "Divídanse las tareas",
+      "Cocinen con música de fondo",
+      "Disfruten lo que hicieron"
+    ],
+    "variations": [
+      {
+        "title": "Reto de cocina (con ingredientes random)",
+        "duration_adjustment": "+15 min"
+      }
+    ]
+  },
+  {
+    "id": "act_004",
+    "title": "Jugar videojuegos cooperativos",
+    "description": "Elijan un juego que puedan jugar juntos, ya sea cooperativo o competitivo amigable.",
+    "tags": ["gaming", "videogames", "indoor", "active", "fun", "playful"],
+    "min_duration_min": 30,
+    "max_duration_min": 120,
+    "intensity": 1,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["Consola o PC", "Controles", "Juego instalado"],
+    "suitability": {
+      "mood": ["energetic", "fun"],
+      "time_of_day": ["afternoon", "evening", "night"]
+    },
+    "steps": [
+      "Elijan el juego (cooperativo preferentemente)",
+      "Configuren controles y dificultad",
+      "Jueguen sin presión, lo importante es pasarla bien",
+      "Tomen pausas si es sesión larga"
+    ]
+  },
+  {
+    "id": "act_005",
+    "title": "Sesión de lectura compartida",
+    "description": "Lean el mismo libro o lean en voz alta el uno al otro. Pueden ser cuentos cortos, poesía o un capítulo de novela.",
+    "tags": ["reading", "literature", "indoor", "calm", "passive", "intimate"],
+    "min_duration_min": 20,
+    "max_duration_min": 60,
+    "intensity": 0,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["Libro físico o digital", "Lugar cómodo"],
+    "suitability": {
+      "mood": ["calm", "tired"],
+      "time_of_day": ["evening", "night", "afternoon"]
+    },
+    "steps": [
+      "Elijan qué leer (libro, poesía, artículo largo)",
+      "Decidan si leen en silencio juntos o en voz alta",
+      "Pónganse cómodos",
+      "Lean sin prisa",
+      "Compartan qué les pareció"
+    ]
+  },
+  {
+    "id": "act_006",
+    "title": "Ver una película completa",
+    "description": "Elijan una película que ambos quieran ver. Puede ser algo nuevo o un clásico que aman.",
+    "tags": ["movie", "film", "indoor", "passive", "entertainment", "relaxing"],
+    "min_duration_min": 90,
+    "max_duration_min": 180,
+    "intensity": 0,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["Pantalla", "Internet o disco", "Snacks opcionales"],
+    "suitability": {
+      "mood": ["tired", "calm", "fun"],
+      "time_of_day": ["evening", "night"]
+    },
+    "steps": [
+      "Elijan película (pueden usar dado si no se deciden)",
+      "Preparen el ambiente (luces, snacks, mantas)",
+      "Apaguen distracciones",
+      "Disfruten sin pausas innecesarias"
+    ]
+  },
+  {
+    "id": "act_007",
+    "title": "Dibujar o hacer arte juntos",
+    "description": "No importa el nivel. Dibujen lo que quieran: retratos mutuos, paisajes imaginarios, garabatos abstractos.",
+    "tags": ["art", "drawing", "creative", "indoor", "active", "playful"],
+    "min_duration_min": 20,
+    "max_duration_min": 60,
+    "intensity": 1,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["Papel", "Lápices/plumas/colores", "Inspiración opcional"],
+    "suitability": {
+      "mood": ["calm", "fun"],
+      "time_of_day": ["afternoon", "evening"]
+    },
+    "steps": [
+      "Consigan materiales básicos",
+      "Decidan qué dibujar (tema libre o challenge)",
+      "Pongan música suave de fondo",
+      "Dibujen sin juzgarse",
+      "Comparen resultados y rían"
+    ]
+  },
+  {
+    "id": "act_008",
+    "title": "Armar un puzzle juntos",
+    "description": "Trabajen en equipo para completar un rompecabezas. Es relajante y satisfactorio.",
+    "tags": ["puzzle", "indoor", "calm", "cooperative", "meditative"],
+    "min_duration_min": 30,
+    "max_duration_min": 120,
+    "intensity": 0,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["Puzzle", "Mesa o superficie plana"],
+    "suitability": {
+      "mood": ["calm", "tired"],
+      "time_of_day": ["afternoon", "evening", "night"]
+    },
+    "steps": [
+      "Elijan un puzzle (300-1000 piezas recomendado)",
+      "Organicen las piezas (bordes primero)",
+      "Pónganse música o podcast de fondo",
+      "Trabajen juntos sin prisa"
+    ]
+  },
+  {
+    "id": "act_009",
+    "title": "Hacer ejercicio en casa",
+    "description": "Sigan un video de yoga, cardio o entrenamiento. Pueden hacerlo juntos o cada quien a su ritmo.",
+    "tags": ["exercise", "fitness", "indoor", "active", "health", "high-energy"],
+    "min_duration_min": 15,
+    "max_duration_min": 45,
+    "intensity": 2,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["Tapete de yoga opcional", "Ropa cómoda", "Internet para video"],
+    "suitability": {
+      "mood": ["energetic"],
+      "time_of_day": ["morning", "afternoon"]
+    },
+    "steps": [
+      "Elijan tipo de ejercicio (yoga, HIIT, baile, etc.)",
+      "Preparen el espacio",
+      "Calienten antes de empezar",
+      "Sigan el video sin competir",
+      "Estiren al finalizar"
+    ]
+  },
+  {
+    "id": "act_010",
+    "title": "Tener una conversación profunda",
+    "description": "Apaguen todo y hablen de verdad. Usen preguntas interesantes o hablen de lo que les preocupa/emociona.",
+    "tags": ["conversation", "intimate", "indoor", "passive", "connection", "emotional"],
+    "min_duration_min": 20,
+    "max_duration_min": 90,
+    "intensity": 0,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["Ninguno (solo ustedes)"],
+    "suitability": {
+      "mood": ["calm", "tired"],
+      "time_of_day": ["evening", "night"]
+    },
+    "steps": [
+      "Apaguen pantallas y distracciones",
+      "Siéntense frente a frente o lado a lado",
+      "Empiecen con una pregunta abierta",
+      "Escuchen de verdad, sin juzgar",
+      "Compartan honestamente"
+    ]
+  },
+  {
+    "id": "act_011",
+    "title": "Preparar y disfrutar bebidas especiales",
+    "description": "Hagan café especial, té, smoothies, o cócteles sin alcohol. Experimenten con recetas.",
+    "tags": ["drinks", "cooking", "indoor", "creative", "relaxing"],
+    "min_duration_min": 15,
+    "max_duration_min": 30,
+    "intensity": 0,
+    "cost": 30,
+    "participants": 2,
+    "required_assets": ["Ingredientes para bebidas", "Utensilios de cocina"],
+    "suitability": {
+      "mood": ["calm", "fun"],
+      "time_of_day": ["afternoon", "evening"]
+    },
+    "steps": [
+      "Elijan qué preparar",
+      "Reúnan ingredientes",
+      "Preparen juntos",
+      "Prueben y ajusten sabores",
+      "Disfruten despacio"
+    ]
+  },
+  {
+    "id": "act_012",
+    "title": "Organizar fotos o recuerdos juntos",
+    "description": "Revisen fotos viejas del celular, hagan un álbum digital, o impriman algunas para guardar.",
+    "tags": ["memories", "photos", "indoor", "passive", "nostalgic", "intimate"],
+    "min_duration_min": 30,
+    "max_duration_min": 90,
+    "intensity": 0,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["Celular/computadora con fotos", "Opcional: impresora"],
+    "suitability": {
+      "mood": ["calm", "fun"],
+      "time_of_day": ["afternoon", "evening"]
+    },
+    "steps": [
+      "Abran galería de fotos",
+      "Elijan favoritas",
+      "Comenten los recuerdos",
+      "Organicen en carpetas o álbum",
+      "Consideren imprimir algunas"
+    ]
+  }
+]

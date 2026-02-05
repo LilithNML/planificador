@@ -1,0 +1,186 @@
+[
+  {
+    "id": "act_out_001",
+    "title": "Caminar por el barrio o parque",
+    "description": "Salgan a caminar sin prisa, explorando su vecindario o un parque cercano. Observen, charlen, respiren aire fresco.",
+    "tags": ["walking", "outdoor", "exercise", "nature", "calm", "low-energy"],
+    "min_duration_min": 20,
+    "max_duration_min": 60,
+    "intensity": 1,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["Zapatos cómodos", "Agua"],
+    "suitability": {
+      "mood": ["calm", "energetic"],
+      "time_of_day": ["morning", "afternoon", "evening"]
+    },
+    "steps": [
+      "Elijan ruta (pueden usar app de mapas)",
+      "Lleven agua",
+      "Caminen a ritmo cómodo",
+      "Hablen o escuchen música juntos",
+      "Observen cosas nuevas en el camino"
+    ]
+  },
+  {
+    "id": "act_out_002",
+    "title": "Picnic en el parque",
+    "description": "Preparen comida sencilla, lleven una manta y disfruten al aire libre.",
+    "tags": ["picnic", "outdoor", "food", "nature", "relaxing", "romantic"],
+    "min_duration_min": 60,
+    "max_duration_min": 180,
+    "intensity": 0,
+    "cost": 100,
+    "participants": 2,
+    "required_assets": ["Manta o sarape", "Comida", "Bebidas", "Servilletas"],
+    "suitability": {
+      "mood": ["calm", "fun"],
+      "time_of_day": ["afternoon", "evening"]
+    },
+    "steps": [
+      "Preparen comida fácil de transportar",
+      "Elijan parque o área verde",
+      "Lleven manta y servilletas",
+      "Busquen lugar con sombra",
+      "Coman, charlen, descansen"
+    ]
+  },
+  {
+    "id": "act_out_003",
+    "title": "Andar en bicicleta",
+    "description": "Salgan a pedalear por ciclovías o parques. Es ejercicio suave y divertido.",
+    "tags": ["cycling", "outdoor", "exercise", "active", "high-energy", "sport"],
+    "min_duration_min": 30,
+    "max_duration_min": 90,
+    "intensity": 2,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["Bicicletas", "Cascos", "Agua"],
+    "suitability": {
+      "mood": ["energetic"],
+      "time_of_day": ["morning", "afternoon"]
+    },
+    "steps": [
+      "Revisen que las bicis estén en buen estado",
+      "Pónganse cascos",
+      "Elijan ruta segura",
+      "Pedaleen a ritmo cómodo",
+      "Hagan pausas si es necesario"
+    ]
+  },
+  {
+    "id": "act_out_004",
+    "title": "Explorar una zona nueva de la ciudad",
+    "description": "Visiten un barrio o colonia que no conozcan. Caminen, observen, tomen fotos.",
+    "tags": ["exploration", "outdoor", "walking", "urban", "discovery", "active"],
+    "min_duration_min": 60,
+    "max_duration_min": 180,
+    "intensity": 1,
+    "cost": 50,
+    "participants": 2,
+    "required_assets": ["Celular con mapas", "Dinero para transporte", "Agua"],
+    "suitability": {
+      "mood": ["fun", "energetic"],
+      "time_of_day": ["morning", "afternoon"]
+    },
+    "steps": [
+      "Elijan zona que les dé curiosidad",
+      "Lleguen en transporte público",
+      "Caminen sin plan fijo",
+      "Tomen fotos de lo que les llame la atención",
+      "Prueben algo de comida local si pueden"
+    ]
+  },
+  {
+    "id": "act_out_005",
+    "title": "Visitar un mercado o tianguis",
+    "description": "Recorran puestos, prueben antojitos, compren algo especial o solo observen el ambiente.",
+    "tags": ["market", "outdoor", "food", "cultural", "social", "active"],
+    "min_duration_min": 45,
+    "max_duration_min": 120,
+    "intensity": 1,
+    "cost": 100,
+    "participants": 2,
+    "required_assets": ["Dinero en efectivo", "Bolsa reutilizable"],
+    "suitability": {
+      "mood": ["fun", "energetic"],
+      "time_of_day": ["morning", "afternoon"]
+    },
+    "steps": [
+      "Busquen mercado o tianguis cercano",
+      "Lleven efectivo",
+      "Recorran con calma",
+      "Prueben cosas nuevas",
+      "Compren algo especial si quieren"
+    ]
+  },
+  {
+    "id": "act_out_006",
+    "title": "Ver el atardecer juntos",
+    "description": "Busquen un lugar con vista (azotea, parque, mirador) y vean cómo se pone el sol.",
+    "tags": ["sunset", "outdoor", "romantic", "calm", "nature", "passive"],
+    "min_duration_min": 30,
+    "max_duration_min": 60,
+    "intensity": 0,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["Ninguno (solo un lugar con vista)"],
+    "suitability": {
+      "mood": ["calm", "fun"],
+      "time_of_day": ["evening"]
+    },
+    "steps": [
+      "Busquen lugar con buena vista al oeste",
+      "Lleguen 20 min antes de que se oculte el sol",
+      "Siéntense cómodos",
+      "Observen en silencio o charlen",
+      "Tomen fotos si quieren"
+    ]
+  },
+  {
+    "id": "act_out_007",
+    "title": "Jugar en un parque (columpios, resbaladillas)",
+    "description": "Regresen a su niño interior. Súbanse a columpios, jueguen, rían sin pena.",
+    "tags": ["playground", "outdoor", "playful", "fun", "active", "silly"],
+    "min_duration_min": 20,
+    "max_duration_min": 60,
+    "intensity": 1,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["Parque con juegos", "Ganas de divertirse"],
+    "suitability": {
+      "mood": ["fun", "energetic"],
+      "time_of_day": ["afternoon", "evening"]
+    },
+    "steps": [
+      "Vayan a parque con juegos infantiles",
+      "Olviden la pena",
+      "Súbanse a columpios, resbaladillas",
+      "Rían mucho",
+      "Tomen fotos divertidas"
+    ]
+  },
+  {
+    "id": "act_out_008",
+    "title": "Hacer ejercicio al aire libre",
+    "description": "Corran, hagan yoga, estiramientos o circuito de ejercicios en el parque.",
+    "tags": ["exercise", "outdoor", "fitness", "active", "high-energy", "health"],
+    "min_duration_min": 20,
+    "max_duration_min": 60,
+    "intensity": 2,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["Ropa deportiva", "Agua", "Tapete opcional"],
+    "suitability": {
+      "mood": ["energetic"],
+      "time_of_day": ["morning", "afternoon"]
+    },
+    "steps": [
+      "Elijan parque o área abierta",
+      "Calienten antes de empezar",
+      "Hagan rutina juntos (pueden usar app)",
+      "No compitan, acompáñense",
+      "Estiren al terminar"
+    ]
+  }
+]
