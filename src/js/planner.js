@@ -445,6 +445,31 @@ export class PlanGenerator {
         return Array.from(assets);
     }
 
+    injectDynamicContent(activity, profiles, mood) {
+    if (activity.id === 'act_yt_001') {
+        const target = profiles.sort((a, b) => b.weight - a.weight)[0].profile;
+
+        let possibleChannels = target.youtube_channels;
+        if (mood === 'calm' || mood === 'tired') {
+            possibleChannels = target.youtube_channels.filter(c =>
+                c.tags.includes('learning') ||
+                c.tags.includes('storytelling') ||
+                c.tags.includes('entertainment')
+            );
+        }
+
+        const channel = possibleChannels[
+            Math.floor(Math.random() * possibleChannels.length)
+        ];
+
+        activity.title = activity.title.replace('${channel}', channel.name);
+        activity.description = activity.description
+            .replace('${channel}', channel.name)
+            .replace('${owner}', target.display_name);
+    }
+    return activity;
+    }
+
     generatePlanId() {
         return `plan_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
     }
