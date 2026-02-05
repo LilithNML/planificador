@@ -11,17 +11,10 @@
     "entertainment": 0.8
   },
   "explicit_likes": [
-    "Videojuegos",
-    "Anime",
-    "Cocinar",
-    "Caminar",
-    "Explorar lugares nuevos",
-    "Tecnología"
+    "Videojuegos", "Anime", "Cocinar", "Caminar", "Explorar lugares nuevos", "Tecnología"
   ],
   "explicit_dislikes": [
-    "Aburrimiento",
-    "Estar encerrado mucho tiempo",
-    "Rutinas muy rígidas"
+    "Aburrimiento", "Estar encerrado mucho tiempo", "Rutinas muy rígidas"
   ],
   "energy_profile": {
     "morning": 0.7,
@@ -30,8 +23,14 @@
     "night": 0.6
   },
   "preferences": {
-    "preferred_intensity": [1, 2],
+    "preferred_intensity": [0, 1, 2], 
     "preferred_location": "both",
     "social_preference": "couple"
-  }
+  },
+  "youtube_channels": [
+    { "name": "Namco Entertainment", "tags": ["gaming", "action"] },
+    { "name": "Horneado", "tags": ["entertainment", "humor"] },
+    { "name": "Yael Otaku", "tags": ["anime", "discussion"] },
+    { "name": "Peluchero Inmortal", "tags": ["gaming", "humor"] }
+  ]
 }
