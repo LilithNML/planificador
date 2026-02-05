@@ -1,0 +1,37 @@
+{
+  "user_id": "haziel",
+  "display_name": "Haziel",
+  "inferred_tags": {
+    "anime": 0.8,
+    "gaming": 0.9,
+    "cooking": 0.6,
+    "outdoor": 0.5,
+    "active": 0.6,
+    "playful": 0.7,
+    "entertainment": 0.8
+  },
+  "explicit_likes": [
+    "Videojuegos",
+    "Anime",
+    "Cocinar",
+    "Caminar",
+    "Explorar lugares nuevos",
+    "Tecnología"
+  ],
+  "explicit_dislikes": [
+    "Aburrimiento",
+    "Estar encerrado mucho tiempo",
+    "Rutinas muy rígidas"
+  ],
+  "energy_profile": {
+    "morning": 0.7,
+    "afternoon": 0.9,
+    "evening": 0.8,
+    "night": 0.6
+  },
+  "preferences": {
+    "preferred_intensity": [1, 2],
+    "preferred_location": "both",
+    "social_preference": "couple"
+  }
+}
