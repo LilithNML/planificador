@@ -281,5 +281,21 @@
       "Organicen en carpetas o álbum",
       "Consideren imprimir algunas"
     ]
+  },
+{
+  "id": "act_yt_001",
+  "title": "Inmersión en YouTube",
+  "description": "Hoy toca explorar el mundo de YouTube. Verán contenido del canal: ${channel}.",
+  "tags": ["entertainment", "indoor", "passive"],
+  "min_duration_min": 30,
+  "max_duration_min": 60,
+  "intensity": 0,
+  "cost": 0,
+  "participants": 2,
+  "required_assets": ["Pantalla", "YouTube"],
+  "suitability": {
+    "mood": ["tired", "calm"],
+    "time_of_day": ["evening", "night"]
   }
+}
 ]
