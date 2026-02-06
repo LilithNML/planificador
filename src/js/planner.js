@@ -458,29 +458,45 @@ sequence = sequence.map(activity =>
     }
 
     injectDynamicContent(activity, profiles, mood) {
-    if (activity.id === 'act_yt_001') {
-        const target = profiles.sort((a, b) => b.weight - a.weight)[0].profile;
+    // Guardas básicos
+    if (!activity || activity.id !== 'act_yt_001') return activity;
 
-        let possibleChannels = target.youtube_channels;
-        if (mood === 'calm' || mood === 'tired') {
-            possibleChannels = target.youtube_channels.filter(c =>
-                c.tags.includes('learning') ||
-                c.tags.includes('storytelling') ||
-                c.tags.includes('entertainment')
-            );
-        }
+    // Ordenar sin mutar el array original
+    const sorted = Array.isArray(profiles) ? [...profiles].sort((a, b) => (b.weight || 0) - (a.weight || 0)) : [];
+    const target = sorted[0]?.profile;
+    if (!target) return activity;
 
-        const channel = possibleChannels[
-            Math.floor(Math.random() * possibleChannels.length)
-        ];
+    const channels = Array.isArray(target.youtube_channels) ? target.youtube_channels : [];
+    if (channels.length === 0) return activity;
 
-        activity.title = activity.title.replace('${channel}', channel.name);
-        activity.description = activity.description
-            .replace('${channel}', channel.name)
-            .replace('${owner}', target.display_name);
+    // Filtrado por mood, si aplica
+    let possibleChannels = channels;
+    if (mood === 'calm' || mood === 'tired') {
+        const filtered = channels.filter(c => {
+            const tags = Array.isArray(c.tags) ? c.tags : [];
+            return tags.includes('learning') || tags.includes('storytelling') || tags.includes('entertainment');
+        });
+        if (filtered.length > 0) possibleChannels = filtered;
     }
+
+    // Si por alguna razón no hay canales tras filtrar, cae al conjunto completo
+    if (possibleChannels.length === 0) possibleChannels = channels;
+
+    const channel = possibleChannels[Math.floor(Math.random() * possibleChannels.length)];
+    if (!channel) return activity;
+
+    // Reemplazos seguros: usar strings por defecto y reemplazos globales
+    activity.title = (activity.title || '').replace(/\$\{channel\}/g, channel.name || '');
+    activity.description = (activity.description || '')
+        .replace(/\$\{channel\}/g, channel.name || '')
+        .replace(/\$\{owner\}/g, target.display_name || '');
+
+    // Guardar meta (opcional pero útil)
+    activity.meta = activity.meta || {};
+    activity.meta.chosenChannel = channel;
+
     return activity;
-    }
+}
 
     generatePlanId() {
         return `plan_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
