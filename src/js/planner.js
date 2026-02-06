@@ -104,18 +104,6 @@ export class PlanGenerator {
         
         // Step 8: Fill small gaps if needed
         sequence = this.fillGaps(sequence, targetMin, pool);
-
-        // Inject dynamic content (YouTube, etc.)
-sequence = sequence.map(activity =>
-    this.injectDynamicContent(
-        activity,
-        [
-            { profile: profiles.lilith, weight: weights.lilith / 100 },
-            { profile: profiles.haziel, weight: weights.haziel / 100 }
-        ],
-        mood
-    )
-);
         
         // Step 9: Generate reasoning/explanation
         const reasoning = this.generateReasoning(params, sequence);
@@ -456,47 +444,6 @@ sequence = sequence.map(activity =>
         
         return Array.from(assets);
     }
-
-    injectDynamicContent(activity, profiles, mood) {
-    // Guardas básicos
-    if (!activity || activity.id !== 'act_yt_001') return activity;
-
-    // Ordenar sin mutar el array original
-    const sorted = Array.isArray(profiles) ? [...profiles].sort((a, b) => (b.weight || 0) - (a.weight || 0)) : [];
-    const target = sorted[0]?.profile;
-    if (!target) return activity;
-
-    const channels = Array.isArray(target.youtube_channels) ? target.youtube_channels : [];
-    if (channels.length === 0) return activity;
-
-    // Filtrado por mood, si aplica
-    let possibleChannels = channels;
-    if (mood === 'calm' || mood === 'tired') {
-        const filtered = channels.filter(c => {
-            const tags = Array.isArray(c.tags) ? c.tags : [];
-            return tags.includes('learning') || tags.includes('storytelling') || tags.includes('entertainment');
-        });
-        if (filtered.length > 0) possibleChannels = filtered;
-    }
-
-    // Si por alguna razón no hay canales tras filtrar, cae al conjunto completo
-    if (possibleChannels.length === 0) possibleChannels = channels;
-
-    const channel = possibleChannels[Math.floor(Math.random() * possibleChannels.length)];
-    if (!channel) return activity;
-
-    // Reemplazos seguros: usar strings por defecto y reemplazos globales
-    activity.title = (activity.title || '').replace(/\$\{channel\}/g, channel.name || '');
-    activity.description = (activity.description || '')
-        .replace(/\$\{channel\}/g, channel.name || '')
-        .replace(/\$\{owner\}/g, target.display_name || '');
-
-    // Guardar meta (opcional pero útil)
-    activity.meta = activity.meta || {};
-    activity.meta.chosenChannel = channel;
-
-    return activity;
-}
 
     generatePlanId() {
         return `plan_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
