@@ -104,6 +104,18 @@ export class PlanGenerator {
         
         // Step 8: Fill small gaps if needed
         sequence = this.fillGaps(sequence, targetMin, pool);
+
+        // Inject dynamic content (YouTube, etc.)
+sequence = sequence.map(activity =>
+    this.injectDynamicContent(
+        activity,
+        [
+            { profile: profiles.lilith, weight: weights.lilith / 100 },
+            { profile: profiles.haziel, weight: weights.haziel / 100 }
+        ],
+        mood
+    )
+);
         
         // Step 9: Generate reasoning/explanation
         const reasoning = this.generateReasoning(params, sequence);
