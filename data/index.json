@@ -2,8 +2,6 @@
   "version": "1.0.0",
   "lastUpdated": "2026-02-11",
   "files": [
-    "activities_core.json",
-    "activities_outdoors.json",
     "activities_anime.json",
     "activities_gaming.json",
     "activities_creative.json"
