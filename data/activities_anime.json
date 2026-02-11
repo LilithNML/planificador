@@ -1,0 +1,217 @@
+[
+  {
+    "id": "ani_001",
+    "title": "Duelo de Shonen: ¡Adrenalina Pura!",
+    "description": "Una sesión intensa de acción. Elijan el anime con las peleas más épicas de su lista y prepárense para el hype.",
+    "tags": ["anime", "action", "energetic", "competition"],
+    "min_duration_min": 45,
+    "max_duration_min": 90,
+    "intensity": 2,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["Anilist", "Discord"],
+    "suitability": {
+      "mood": ["energetic", "fun"],
+      "time_of_day": ["afternoon", "evening"]
+    },
+    "steps": [
+      "Cada uno propone 1 anime de acción de la lista.",
+      "Hagan un 'piedra, papel o tijera' por chat para elegir cuál ver.",
+      "Reproduzcan el episodio y comenten cada golpe/técnica especial.",
+      "Al final, decidan quién fue el MVP del episodio."
+    ]
+  },
+  {
+    "id": "ani_002",
+    "title": "Noche de Romance",
+    "description": "Momento para ponerse sentimentales con una historia de romance o drama profundo. Ideal para conectar emocionalmente.",
+    "tags": ["anime", "romance", "calm", "emotional"],
+    "min_duration_min": 30,
+    "max_duration_min": 90,
+    "intensity": 0,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["Anilist", "Discord"],
+    "suitability": {
+      "mood": ["calm", "romantic"],
+      "time_of_day": ["evening", "night"]
+    },
+    "steps": [
+      "Busquen un anime con el tag 'Slice of Life' o 'Romance'.",
+      "Vean el capítulo en silencio, disfrutando la atmósfera.",
+      "Al terminar, compartan por chat qué escena les recordó al otro o les hizo sonreír."
+    ]
+  },
+  {
+    "id": "ani_003",
+    "title": "Misterio y Juegos Mentales",
+    "description": "Un plan intelectual. Vean un anime donde nada es lo que parece y traten de resolver el misterio antes que los protagonistas.",
+    "tags": ["anime", "mystery", "intellectual", "dark"],
+    "min_duration_min": 45,
+    "max_duration_min": 90,
+    "intensity": 1,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["Anilist", "Discord"],
+    "suitability": {
+      "mood": ["intellectual", "calm"],
+      "time_of_day": ["evening", "night"]
+    },
+    "steps": [
+      "Elegir un anime de suspenso o psicológico.",
+      "Pausar el episodio a la mitad exactamente.",
+      "Enviar por chat su 'teoría principal' de quién es el culpable o qué pasará.",
+      "Terminar el episodio y ver quién estuvo más cerca de la verdad."
+    ]
+  },
+  {
+    "id": "ani_004",
+    "title": "Cine de Anime: Gran Función",
+    "description": "Pongan las palomitas listas. Hoy toca una película completa en lugar de episodios sueltos.",
+    "tags": ["anime", "movie", "long-duration", "special"],
+    "min_duration_min": 90,
+    "max_duration_min": 180,
+    "intensity": 1,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["Palomitas/Snacks", "Tiempo sin interrupciones"],
+    "suitability": {
+      "mood": ["calm", "fun"],
+      "time_of_day": ["afternoon", "evening", "night"]
+    },
+    "steps": [
+      "Seleccionar una película de anime de su lista 'Top pendientes'.",
+      "Establecer una hora exacta de inicio.",
+      "Durante la película, solo enviar emojis por chat para no distraerse.",
+      "Al terminar, platicar sobre la película o escribir una crítica."
+    ]
+  },
+  {
+    "id": "ani_005",
+    "title": "Maratón de 'Solo un episodio'",
+    "description": "Cata de animes. Vean el primer episodio de varios animes distintos para ver cuál les engancha.",
+    "tags": ["anime", "variety", "fast-paced", "fun"],
+    "min_duration_min": 60,
+    "max_duration_min": 120,
+    "intensity": 1,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["Lista de los 200 animes"],
+    "suitability": {
+      "mood": ["fun", "energetic"],
+      "time_of_day": ["morning", "afternoon"]
+    },
+    "steps": [
+      "Elegir 3 animes al azar de la lista que nunca hayan visto.",
+      "Ver solo el episodio 1 de cada uno.",
+      "Después de cada uno, votar: 'Seguir viendo', 'A la basura' o 'Tal vez luego'.",
+      "Si coinciden en un 'Seguir viendo', ese será el plan de mañana."
+    ]
+  },
+  {
+    "id": "ani_006",
+    "title": "Joyas Ocultas: Cortometrajes",
+    "description": "Exploren el lado más artístico e indie del anime con series de episodios cortos (5-10 min) o cortos experimentales.",
+    "tags": ["anime", "indie", "discovery", "creative"],
+    "min_duration_min": 20,
+    "max_duration_min": 45,
+    "intensity": 1,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["YouTube"],
+    "suitability": {
+      "mood": ["intellectual", "calm"],
+      "time_of_day": ["morning", "evening"]
+    },
+    "steps": [
+      "Buscar un anime de formato corto (shorts) o un corto de estudio.",
+      "Analizar el estilo de arte: ¿Es único? ¿Qué intentaba transmitir?",
+      "Compartir una captura del frame que más les haya gustado estéticamente."
+    ]
+  },
+  {
+    "id": "ani_007",
+    "title": "Noche de Comedia y Absurdo",
+    "description": "Risas aseguradas. Elijan ese anime que saben que es una tontería pero les hace morir de risa.",
+    "tags": ["anime", "comedy", "fun", "playful"],
+    "min_duration_min": 25,
+    "max_duration_min": 50,
+    "intensity": 1,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["Ganas de reír", "Discord"],
+    "suitability": {
+      "mood": ["fun", "energetic"],
+      "time_of_day": ["afternoon", "evening"]
+    },
+    "steps": [
+      "Elegir un anime de comedia.",
+      "El reto: el primero que comente algo serio en el chat, pierde.",
+      "Enviar stickers locos que reaccionen a las tonterías que pasen en pantalla."
+    ]
+  },
+  {
+    "id": "ani_008",
+    "title": "Rewatch de Nostalgia",
+    "description": "Vuelvan a ver un episodio de ese anime que ambos aman o que vieron cuando eran niños.",
+    "tags": ["anime", "nostalgia", "comfort", "calm"],
+    "min_duration_min": 25,
+    "max_duration_min": 50,
+    "intensity": 0,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["Ese anime viejo confiable"],
+    "suitability": {
+      "mood": ["calm", "tired"],
+      "time_of_day": ["evening", "night"]
+    },
+    "steps": [
+      "Elegir un episodio icónico de una serie que ya hayan visto.",
+      "Recordar juntos qué sentían la primera vez que lo vieron.",
+      "Disfrutar de la comodidad de saber qué va a pasar."
+    ]
+  },
+  {
+    "id": "ani_009",
+    "title": "Exploración de Temporada",
+    "description": "Investigación de mercado otaku. Miren qué es lo nuevo que está saliendo en Japón.",
+    "tags": ["anime", "news", "research", "technology"],
+    "min_duration_min": 30,
+    "max_duration_min": 60,
+    "intensity": 1,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["Páginas tipo Anilist o MyAnimeList"],
+    "suitability": {
+      "mood": ["intellectual", "fun"],
+      "time_of_day": ["morning", "afternoon"]
+    },
+    "steps": [
+      "Entrar a una web de estrenos de temporada.",
+      "Cada uno debe elegir los 3 que tengan el arte más raro y los 3 que parezcan obras maestras.",
+      "Ver los trailers (PV) de esos animes sincronizados por chat.",
+      "Añadir los ganadores a la lista de los 200 pendientes."
+    ]
+  },
+  {
+    "id": "ani_010",
+    "title": "Documental o Making-of",
+    "description": "Aprendan sobre cómo se hace la magia. Vean un detrás de cámaras de un estudio o la vida de un mangaka.",
+    "tags": ["anime", "education", "intellectual", "art"],
+    "min_duration_min": 40,
+    "max_duration_min": 90,
+    "intensity": 0,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["YouTube o documental de streaming"],
+    "suitability": {
+      "mood": ["intellectual", "calm"],
+      "time_of_day": ["afternoon", "evening"]
+    },
+    "steps": [
+      "Buscar un video sobre 'How it's made' de anime o entrevista a un autor.",
+      "Comentar qué parte del proceso les pareció más difícil.",
+      "Valorar el trabajo que hay detrás del próximo anime que vean juntos."
+    ]
+  }
+]
