@@ -1,0 +1,218 @@
+[
+  {
+    "id": "cre_001",
+    "title": "Las Crónicas de Samuel: Foto-Historia",
+    "description": "Creen una pequeña aventura donde Samuel sea el protagonista. Haziel toma la foto y Lilith le da vida.",
+    "tags": ["creative", "samuel", "photography", "storytelling", "playful"],
+    "min_duration_min": 20,
+    "max_duration_min": 45,
+    "intensity": 1,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["Samuel"],
+    "suitability": {
+      "mood": ["fun", "playful"],
+      "time_of_day": ["morning", "afternoon"]
+    },
+    "steps": [
+      "Haziel pone a Samuel en una situación cotidiana (ej. 'leyendo', 'cocinando' o 'atrapado').",
+      "Haziel envía la foto a Lilith.",
+      "Lilith debe editar la foto (digital) o escribir un párrafo narrando qué le está pasando a su hijo.",
+      "Guardar la foto en un álbum compartido de 'Recuerdos de Samuel'."
+    ]
+  },
+  {
+    "id": "cre_002",
+    "title": "Cadáver Exquisito: Nuestra Historia",
+    "description": "Escriban una historia juntos donde ninguno sabe exactamente hacia dónde va el guion. Un párrafo a la vez.",
+    "tags": ["creative", "writing", "intellectual", "collaborative"],
+    "min_duration_min": 30,
+    "max_duration_min": 60,
+    "intensity": 0,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["Google keep compartido"],
+    "suitability": {
+      "mood": ["intellectual", "calm"],
+      "time_of_day": ["evening", "night"]
+    },
+    "steps": [
+      "Elijan un género (fantasía, romance, misterio).",
+      "Lilith escribe las primeras 3 líneas.",
+      "Haziel continúa con otras 3 líneas intentando dar un giro inesperado.",
+      "Repitan hasta que la historia tenga un final (o sigan en la próxima sesión)."
+    ]
+  },
+  {
+    "id": "cre_003",
+    "title": "Retrato Mixto: Analógico vs Digital",
+    "description": "Un ejercicio de arte donde cada uno usa su mejor herramienta para dibujar al otro o algo que ambos amen.",
+    "tags": ["creative", "art", "drawing", "portrait"],
+    "min_duration_min": 45,
+    "max_duration_min": 90,
+    "intensity": 1,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["Libreta y lápiz (Haziel)", "Tablet (Lilith)"],
+    "suitability": {
+      "mood": ["calm", "intellectual"],
+      "time_of_day": ["afternoon", "evening"]
+    },
+    "steps": [
+      "Intercambien una selfie reciente por WhatsApp.",
+      "Pongan música tranquila de fondo.",
+      "Haziel dibuja a Lilith en su libreta; Lilith hace una versión digital de Haziel.",
+      "Muestren el resultado al final. No importa el nivel, lo que importa es el detalle."
+    ]
+  },
+  {
+    "id": "cre_004",
+    "title": "Club de Manga Privado",
+    "description": "Lean un capítulo de un manga nuevo o pendiente al mismo tiempo y analicen el dibujo y la trama.",
+    "tags": ["creative", "manga", "reading", "intellectual"],
+    "min_duration_min": 30,
+    "max_duration_min": 50,
+    "intensity": 0,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["Manga digital o físico"],
+    "suitability": {
+      "mood": ["calm"],
+      "time_of_day": ["morning", "night"]
+    },
+    "steps": [
+      "Elegir un manga de la lista de pendientes.",
+      "Leer el mismo capítulo en silencio (pueden avisar por chat: 'voy por la pág 10').",
+      "Al terminar, cada uno debe decir cuál fue su panel (dibujo) favorito y por qué.",
+      "Teorizar sobre qué pasará en el siguiente capítulo."
+    ]
+  },
+  {
+    "id": "cre_005",
+    "title": "Contraste de Horizontes: Ciudad vs Desierto",
+    "description": "Usen sus entornos tan diferentes para crear una composición fotográfica conjunta.",
+    "tags": ["creative", "photography", "environment", "connection"],
+    "min_duration_min": 10,
+    "max_duration_min": 25,
+    "intensity": 1,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["Smartphone"],
+    "suitability": {
+      "mood": ["energetic", "fun"],
+      "time_of_day": ["morning", "afternoon"]
+    },
+    "steps": [
+      "A la misma hora (ej. 10am Lilith / 9am Haziel), asomarse a la ventana.",
+      "Tomar una foto de algo que represente su entorno (Lilith: edificios/tráfico; Haziel: arena/cielo despejado/cactus).",
+      "Enviarlas al mismo tiempo.",
+      "Lilith puede hacer un collage rápido uniendo ambas realidades en una sola imagen."
+    ]
+  },
+  {
+    "id": "cre_006",
+    "title": "Cuestionario para Personajes de Nuestra Historia",
+    "description": "Si fueran personajes de un anime o de la historia que están escribiendo, ¿cómo serían? Profundicen en sus 'alter ego'.",
+    "tags": ["creative", "roleplay", "intellectual", "writing"],
+    "min_duration_min": 30,
+    "max_duration_min": 60,
+    "intensity": 0,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["WhatsApp"],
+    "suitability": {
+      "mood": ["intellectual", "calm"],
+      "time_of_day": ["evening", "night"]
+    },
+    "steps": [
+      "Hacerse preguntas de '¿Qué preferiría tu personaje?'.",
+      "Definir sus poderes, debilidades y su relación dentro de ese mundo de ficción.",
+      "Haziel puede anotar los datos clave en su libreta para que no se olviden."
+    ]
+  },
+  {
+    "id": "cre_007",
+    "title": "Sesión de Selfies Temática (Solo para tus ojos)",
+    "description": "Haziel ama las fotos de Lilith. Hoy toca una sesión con un concepto divertido o tierno.",
+    "tags": ["creative", "photography", "romantic", "playful"],
+    "min_duration_min": 15,
+    "max_duration_min": 30,
+    "intensity": 1,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["Smartphone", "Ropa que tengan en casa"],
+    "suitability": {
+      "mood": ["fun", "romantic"],
+      "time_of_day": ["afternoon", "evening"]
+    },
+    "steps": [
+      "Haziel propone un tema (ej. 'Modo Otaku', 'Recién despertada', 'Elegante').",
+      "Lilith se toma 3 fotos siguiendo ese tema.",
+      "Haziel debe reaccionar a cada una con un cumplido creativo o un dibujo rápido encima de la foto."
+    ]
+  },
+  {
+    "id": "cre_008",
+    "title": "Pictionary Casero por Chat",
+    "description": "Dibujar conceptos rápidos en papel o digital y que el otro adivine. ¡Sin usar palabras!",
+    "tags": ["creative", "art", "playful", "game"],
+    "min_duration_min": 20,
+    "max_duration_min": 45,
+    "intensity": 1,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["Papel y lápiz", "App de dibujo"],
+    "suitability": {
+      "mood": ["fun", "playful"],
+      "time_of_day": ["any"]
+    },
+    "steps": [
+      "Lilith piensa un objeto o personaje de anime y lo dibuja en 30 segundos.",
+      "Envía la foto/captura a Haziel.",
+      "Haziel tiene 3 intentos para adivinar por chat.",
+      "Intercambiar turnos. El que adivine más rápido gana un 'vale por un deseo' simbólico."
+    ]
+  },
+  {
+    "id": "cre_009",
+    "title": "Playlist para Escenas de Nuestra Vida",
+    "description": "Imaginen que su relación es un anime. ¿Qué canción sonaría en el opening, en una pelea o en un momento romántico?",
+    "tags": ["creative", "music", "intellectual", "romantic"],
+    "min_duration_min": 30,
+    "max_duration_min": 60,
+    "intensity": 0,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["Spotify/YouTube", "WhatsApp"],
+    "suitability": {
+      "mood": ["calm", "romantic"],
+      "time_of_day": ["evening", "night"]
+    },
+    "steps": [
+      "Definir 5 'escenas' clave de su historia juntos.",
+      "Cada uno busca una canción que encaje perfectamente con esa escena.",
+      "Escuchar los fragmentos juntos (en paralelo) y explicar por qué eligieron esa."
+    ]
+  },
+  {
+    "id": "cre_010",
+    "title": "La Carta del Futuro (Cápsula del Tiempo)",
+    "description": "Escribir algo hoy que solo leerán en una semana.",
+    "tags": ["creative", "writing", "romantic", "emotional"],
+    "min_duration_min": 20,
+    "max_duration_min": 40,
+    "intensity": 0,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["Papel y lápiz"],
+    "suitability": {
+      "mood": ["romantic", "calm"],
+      "time_of_day": ["night"]
+    },
+    "steps": [
+      "Escribir una carta expresando qué es lo que más extrañan del otro hoy.",
+      "Enviar carta mediante página web 'FutureMe'.",
+      "Prometer no decir qué dice la carta hasta el día de la apertura."
+    ]
+  }
+]
