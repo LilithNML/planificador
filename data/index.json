@@ -5,12 +5,14 @@
     "activities_core.json",
     "activities_outdoors.json",
     "activities_anime.json",
-    "activities_gaming.json"
+    "activities_gaming.json",
+    "activities_creative.json"
   ],
   "categories": {
     "core": "Actividades principales de interior y entretenimiento",
     "outdoors": "Actividades al aire libre y exteriores",
     "anime": "Actividades y dinámicas de visionado de anime",
-    "gaming": "Videojuegos cooperativos y retos digitales"
+    "gaming": "Videojuegos cooperativos y retos digitales",
+    "creative": "Retos creativos, escritura y dinámicas con Samuel"
   }
 }
