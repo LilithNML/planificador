@@ -1,0 +1,1468 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity Editor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            bg: '#0a0a0f',
+                            surface: '#13131a',
+                            border: '#1f1f28',
+                            accent: '#7c3aed',
+                            accentHover: '#6d28d9',
+                            text: '#e4e4e7',
+                            textMuted: '#a1a1aa',
+                        }
+                    },
+                    fontFamily: {
+                        display: ['Space Grotesk', 'system-ui', 'sans-serif'],
+                        body: ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: #0a0a0f;
+            color: #e4e4e7;
+            margin: 0;
+            padding: 0;
+        }
+
+        .app-container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            min-height: 100vh;
+        }
+
+        @media (max-width: 768px) {
+            .app-container {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                position: fixed;
+                left: -280px;
+                transition: left 0.3s ease;
+                z-index: 50;
+                height: 100vh;
+            }
+            .sidebar.open {
+                left: 0;
+            }
+        }
+
+        .sidebar {
+            background: #13131a;
+            border-right: 1px solid #1f1f28;
+            padding: 2rem 1.5rem;
+            overflow-y: auto;
+        }
+
+        .main-content {
+            padding: 2rem;
+            overflow-y: auto;
+            max-height: 100vh;
+        }
+
+        .activity-card {
+            background: #13131a;
+            border: 1px solid #1f1f28;
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .activity-card:hover {
+            border-color: #7c3aed;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(124, 58, 237, 0.15);
+        }
+
+        .tag-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin: 0.25rem;
+            background: rgba(124, 58, 237, 0.1);
+            color: #a78bfa;
+            border: 1px solid rgba(124, 58, 237, 0.2);
+        }
+
+        .intensity-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .intensity-0 {
+            background: rgba(34, 197, 94, 0.1);
+            color: #4ade80;
+        }
+
+        .intensity-1 {
+            background: rgba(251, 191, 36, 0.1);
+            color: #fbbf24;
+        }
+
+        .intensity-2 {
+            background: rgba(239, 68, 68, 0.1);
+            color: #f87171;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            display: none;
+            z-index: 100;
+            animation: fadeIn 0.2s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .modal-content {
+            background: #13131a;
+            border: 1px solid #1f1f28;
+            border-radius: 16px;
+            padding: 2rem;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .input-field, .textarea-field, .select-field {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: #0a0a0f;
+            border: 1px solid #1f1f28;
+            border-radius: 8px;
+            color: #e4e4e7;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+        }
+
+        .input-field:focus, .textarea-field:focus, .select-field:focus {
+            outline: none;
+            border-color: #7c3aed;
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+        }
+
+        .input-field.error, .textarea-field.error, .select-field.error {
+            border-color: #ef4444;
+        }
+
+        .error-message {
+            color: #ef4444;
+            font-size: 0.75rem;
+            margin-top: 0.25rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-primary {
+            background: #7c3aed;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #6d28d9;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #a1a1aa;
+            border: 1px solid #1f1f28;
+        }
+
+        .btn-secondary:hover {
+            background: #1f1f28;
+            color: #e4e4e7;
+        }
+
+        .btn-danger {
+            background: rgba(239, 68, 68, 0.1);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .btn-danger:hover {
+            background: rgba(239, 68, 68, 0.2);
+        }
+
+        .tag-input-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            background: #0a0a0f;
+            border: 1px solid #1f1f28;
+            border-radius: 8px;
+            min-height: 50px;
+        }
+
+        .tag-input-container:focus-within {
+            border-color: #7c3aed;
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+        }
+
+        .removable-tag {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            background: rgba(124, 58, 237, 0.1);
+            color: #a78bfa;
+            border: 1px solid rgba(124, 58, 237, 0.2);
+            border-radius: 6px;
+            font-size: 0.75rem;
+        }
+
+        .remove-tag-btn {
+            background: none;
+            border: none;
+            color: #a78bfa;
+            cursor: pointer;
+            padding: 0;
+            font-size: 1rem;
+            line-height: 1;
+        }
+
+        .list-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem;
+            background: #0a0a0f;
+            border: 1px solid #1f1f28;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+
+        .drag-handle {
+            cursor: grab;
+            color: #52525b;
+        }
+
+        .drag-handle:active {
+            cursor: grabbing;
+        }
+
+        .validation-summary {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #13131a;
+            border: 1px solid #1f1f28;
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+            z-index: 200;
+            animation: slideIn 0.3s ease;
+            max-width: 300px;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .toast.success {
+            border-left: 3px solid #4ade80;
+        }
+
+        .toast.error {
+            border-left: 3px solid #f87171;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #71717a;
+        }
+
+        .empty-state svg {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 1rem;
+            opacity: 0.3;
+        }
+    </style>
+</head>
+<body class="dark">
+    <!-- Mobile Menu Toggle -->
+    <button id="mobileMenuBtn" class="fixed top-4 left-4 z-50 md:hidden btn btn-secondary">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 12h18M3 6h18M3 18h18"/>
+        </svg>
+    </button>
+
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="mb-8">
+                <h1 class="text-2xl font-display font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                    Activity Editor
+                </h1>
+                <p class="text-sm text-dark-textMuted mt-1">Plan Generator Admin</p>
+            </div>
+
+            <!-- Import/Export Section -->
+            <div class="mb-6">
+                <h3 class="text-xs font-semibold text-dark-textMuted uppercase tracking-wider mb-3">Archivos</h3>
+                <div class="space-y-2">
+                    <label class="btn btn-secondary w-full cursor-pointer text-center block">
+                        <input type="file" id="importFile" accept=".json" class="hidden" multiple>
+                        📤 Importar JSON
+                    </label>
+                    <button id="exportBtn" class="btn btn-primary w-full">
+                        💾 Exportar Todo
+                    </button>
+                    <button id="generateIndexBtn" class="btn btn-secondary w-full">
+                        📋 Generar Index
+                    </button>
+                </div>
+            </div>
+
+            <!-- View Controls -->
+            <div class="mb-6">
+                <h3 class="text-xs font-semibold text-dark-textMuted uppercase tracking-wider mb-3">Vista</h3>
+                <div class="space-y-2">
+                    <button id="viewActivities" class="btn btn-primary w-full text-left">
+                        🎯 Actividades
+                    </button>
+                    <button id="viewProfiles" class="btn btn-secondary w-full text-left">
+                        👤 Perfiles
+                    </button>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="mt-8 p-4 bg-dark-bg rounded-lg border border-dark-border">
+                <div class="text-xs text-dark-textMuted mb-2">Estadísticas</div>
+                <div class="text-2xl font-bold font-display" id="activityCount">0</div>
+                <div class="text-xs text-dark-textMuted">Actividades</div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div id="activitiesView">
+                <!-- Header -->
+                <div class="flex justify-between items-center mb-6">
+                    <div>
+                        <h2 class="text-3xl font-display font-bold">Actividades</h2>
+                        <p class="text-dark-textMuted mt-1">Gestiona el catálogo de actividades</p>
+                    </div>
+                    <button id="addActivityBtn" class="btn btn-primary">
+                        + Nueva Actividad
+                    </button>
+                </div>
+
+                <!-- Filters -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                    <input type="text" id="searchInput" placeholder="Buscar actividades..." class="input-field">
+                    <select id="filterIntensity" class="select-field">
+                        <option value="">Todas las intensidades</option>
+                        <option value="0">Baja</option>
+                        <option value="1">Media</option>
+                        <option value="2">Alta</option>
+                    </select>
+                    <select id="filterTag" class="select-field">
+                        <option value="">Todos los tags</option>
+                    </select>
+                    <button id="clearFilters" class="btn btn-secondary">
+                        Limpiar Filtros
+                    </button>
+                </div>
+
+                <!-- Activities Grid -->
+                <div id="activitiesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Activities will be rendered here -->
+                </div>
+
+                <!-- Empty State -->
+                <div id="emptyState" class="empty-state hidden">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <h3 class="text-xl font-semibold mb-2">No hay actividades</h3>
+                    <p class="text-dark-textMuted">Importa un archivo JSON o crea una nueva actividad</p>
+                </div>
+            </div>
+
+            <div id="profilesView" class="hidden">
+                <div class="flex justify-between items-center mb-6">
+                    <div>
+                        <h2 class="text-3xl font-display font-bold">Perfiles</h2>
+                        <p class="text-dark-textMuted mt-1">Gestiona perfiles de usuarios</p>
+                    </div>
+                    <button id="addProfileBtn" class="btn btn-primary">
+                        + Nuevo Perfil
+                    </button>
+                </div>
+
+                <div id="profilesGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Profiles will be rendered here -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Activity Modal -->
+    <div id="activityModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="flex justify-between items-start mb-6">
+                <div>
+                    <h2 class="text-2xl font-display font-bold" id="modalTitle">Nueva Actividad</h2>
+                    <p class="text-dark-textMuted text-sm mt-1">Todos los campos marcados con * son obligatorios</p>
+                </div>
+                <button id="closeModal" class="text-dark-textMuted hover:text-dark-text text-2xl">×</button>
+            </div>
+
+            <!-- Validation Errors -->
+            <div id="validationErrors" class="validation-summary hidden">
+                <div class="font-semibold mb-2">⚠️ Errores de validación:</div>
+                <ul id="errorList" class="list-disc list-inside text-sm space-y-1"></ul>
+            </div>
+
+            <form id="activityForm" class="space-y-6">
+                <!-- Basic Info -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-2">ID *</label>
+                        <input type="text" id="activityId" class="input-field" placeholder="act_001" required>
+                        <p class="text-xs text-dark-textMuted mt-1">Debe ser único en todo el dataset</p>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Participantes *</label>
+                        <input type="number" id="participants" class="input-field" value="2" min="1" required>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium mb-2">Título *</label>
+                    <input type="text" id="title" class="input-field" placeholder="Ej: Ver un episodio de anime" required>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium mb-2">Descripción *</label>
+                    <textarea id="description" class="textarea-field" rows="3" placeholder="Descripción detallada de la actividad..." required></textarea>
+                </div>
+
+                <!-- Tags -->
+                <div>
+                    <label class="block text-sm font-medium mb-2">Tags * (mínimo 3)</label>
+                    <div class="tag-input-container" id="tagContainer">
+                        <input type="text" id="tagInput" class="bg-transparent border-none outline-none flex-1 min-w-[120px]" placeholder="Escribe y presiona Enter...">
+                    </div>
+                    <div class="mt-2 flex flex-wrap gap-2" id="suggestedTags">
+                        <!-- Suggested tags will appear here -->
+                    </div>
+                </div>
+
+                <!-- Duration and Intensity -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Duración Min (min) *</label>
+                        <input type="number" id="minDuration" class="input-field" min="1" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Duración Max (min) *</label>
+                        <input type="number" id="maxDuration" class="input-field" min="1" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Costo *</label>
+                        <input type="number" id="cost" class="input-field" min="0" value="0" required>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium mb-2">Intensidad *</label>
+                    <div class="grid grid-cols-3 gap-3">
+                        <button type="button" class="intensity-btn p-4 border-2 border-dark-border rounded-lg text-center transition-all hover:border-purple-500" data-intensity="0">
+                            <div class="text-2xl mb-1">🟢</div>
+                            <div class="font-semibold">Baja</div>
+                            <div class="text-xs text-dark-textMuted">Relajado</div>
+                        </button>
+                        <button type="button" class="intensity-btn p-4 border-2 border-dark-border rounded-lg text-center transition-all hover:border-purple-500" data-intensity="1">
+                            <div class="text-2xl mb-1">🟡</div>
+                            <div class="font-semibold">Media</div>
+                            <div class="text-xs text-dark-textMuted">Moderado</div>
+                        </button>
+                        <button type="button" class="intensity-btn p-4 border-2 border-dark-border rounded-lg text-center transition-all hover:border-purple-500" data-intensity="2">
+                            <div class="text-2xl mb-1">🔴</div>
+                            <div class="font-semibold">Alta</div>
+                            <div class="text-xs text-dark-textMuted">Energético</div>
+                        </button>
+                    </div>
+                    <input type="hidden" id="intensity" required>
+                </div>
+
+                <!-- Required Assets -->
+                <div>
+                    <label class="block text-sm font-medium mb-2">Assets Requeridos</label>
+                    <div id="assetsList" class="space-y-2 mb-2">
+                        <!-- Asset items will appear here -->
+                    </div>
+                    <button type="button" id="addAssetBtn" class="btn btn-secondary">
+                        + Añadir Asset
+                    </button>
+                </div>
+
+                <!-- Suitability -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Moods</label>
+                        <div class="space-y-2">
+                            <label class="flex items-center gap-2">
+                                <input type="checkbox" class="mood-check" value="tired">
+                                <span class="text-sm">Cansado</span>
+                            </label>
+                            <label class="flex items-center gap-2">
+                                <input type="checkbox" class="mood-check" value="energetic">
+                                <span class="text-sm">Energético</span>
+                            </label>
+                            <label class="flex items-center gap-2">
+                                <input type="checkbox" class="mood-check" value="calm">
+                                <span class="text-sm">Tranquilo</span>
+                            </label>
+                            <label class="flex items-center gap-2">
+                                <input type="checkbox" class="mood-check" value="fun">
+                                <span class="text-sm">Divertido</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Momento del Día</label>
+                        <div class="space-y-2">
+                            <label class="flex items-center gap-2">
+                                <input type="checkbox" class="time-check" value="morning">
+                                <span class="text-sm">Mañana</span>
+                            </label>
+                            <label class="flex items-center gap-2">
+                                <input type="checkbox" class="time-check" value="afternoon">
+                                <span class="text-sm">Tarde</span>
+                            </label>
+                            <label class="flex items-center gap-2">
+                                <input type="checkbox" class="time-check" value="evening">
+                                <span class="text-sm">Atardecer</span>
+                            </label>
+                            <label class="flex items-center gap-2">
+                                <input type="checkbox" class="time-check" value="night">
+                                <span class="text-sm">Noche</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Steps -->
+                <div>
+                    <label class="block text-sm font-medium mb-2">Pasos (Opcional)</label>
+                    <div id="stepsList" class="space-y-2 mb-2">
+                        <!-- Steps will appear here -->
+                    </div>
+                    <button type="button" id="addStepBtn" class="btn btn-secondary">
+                        + Añadir Paso
+                    </button>
+                </div>
+
+                <!-- Form Actions -->
+                <div class="flex gap-3 pt-4 border-t border-dark-border">
+                    <button type="submit" class="btn btn-primary flex-1">
+                        💾 Guardar Actividad
+                    </button>
+                    <button type="button" id="deleteActivityBtn" class="btn btn-danger hidden">
+                        🗑️ Eliminar
+                    </button>
+                    <button type="button" id="cancelBtn" class="btn btn-secondary">
+                        Cancelar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Profile Modal -->
+    <div id="profileModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="flex justify-between items-start mb-6">
+                <div>
+                    <h2 class="text-2xl font-display font-bold">Editar Perfil</h2>
+                </div>
+                <button id="closeProfileModal" class="text-dark-textMuted hover:text-dark-text text-2xl">×</button>
+            </div>
+
+            <form id="profileForm" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-2">User ID *</label>
+                        <input type="text" id="profileUserId" class="input-field" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Nombre *</label>
+                        <input type="text" id="profileDisplayName" class="input-field" required>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium mb-3">Perfil de Energía</label>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm">Mañana</span>
+                                <span class="text-sm text-dark-textMuted" id="morningValue">0.5</span>
+                            </div>
+                            <input type="range" id="energyMorning" min="0" max="1" step="0.1" value="0.5" class="w-full">
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm">Tarde</span>
+                                <span class="text-sm text-dark-textMuted" id="afternoonValue">0.8</span>
+                            </div>
+                            <input type="range" id="energyAfternoon" min="0" max="1" step="0.1" value="0.8" class="w-full">
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm">Atardecer</span>
+                                <span class="text-sm text-dark-textMuted" id="eveningValue">0.9</span>
+                            </div>
+                            <input type="range" id="energyEvening" min="0" max="1" step="0.1" value="0.9" class="w-full">
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm">Noche</span>
+                                <span class="text-sm text-dark-textMuted" id="nightValue">0.7</span>
+                            </div>
+                            <input type="range" id="energyNight" min="0" max="1" step="0.1" value="0.7" class="w-full">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Ubicación Preferida</label>
+                        <select id="prefLocation" class="select-field">
+                            <option value="indoor">Interior</option>
+                            <option value="outdoor">Exterior</option>
+                            <option value="both">Ambos</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Preferencia Social</label>
+                        <select id="prefSocial" class="select-field">
+                            <option value="intimate">Íntimo</option>
+                            <option value="couple">Pareja</option>
+                            <option value="social">Social</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Intensidad</label>
+                        <select id="prefIntensity" class="select-field" multiple size="3">
+                            <option value="0">Baja</option>
+                            <option value="1">Media</option>
+                            <option value="2">Alta</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex gap-3 pt-4 border-t border-dark-border">
+                    <button type="submit" class="btn btn-primary flex-1">
+                        💾 Guardar Perfil
+                    </button>
+                    <button type="button" id="cancelProfileBtn" class="btn btn-secondary">
+                        Cancelar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Application State
+        const state = {
+            activities: [],
+            profiles: [],
+            currentActivity: null,
+            currentProfile: null,
+            filters: {
+                search: '',
+                intensity: '',
+                tag: ''
+            }
+        };
+
+        // Standard Tags from Schema
+        const STANDARD_TAGS = [
+            'anime', 'gaming', 'cooking', 'reading', 'art', 'movie', 'music', 'podcast',
+            'exercise', 'walking', 'cycling', 'sport',
+            'conversation', 'intimate', 'social',
+            'indoor', 'outdoor',
+            'passive', 'active', 'low-energy', 'high-energy',
+            'relaxing', 'calm', 'peaceful', 'meditative',
+            'dynamic', 'energetic',
+            'playful', 'fun', 'funny', 'entertaining',
+            'creative', 'skill-building', 'learning',
+            'romantic', 'nostalgic', 'emotional'
+        ];
+
+        const MOODS = ['tired', 'energetic', 'calm', 'fun'];
+        const TIME_OF_DAY = ['morning', 'afternoon', 'evening', 'night'];
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeEventListeners();
+            renderSuggestedTags();
+            updateStats();
+        });
+
+        function initializeEventListeners() {
+            // Mobile menu
+            document.getElementById('mobileMenuBtn')?.addEventListener('click', () => {
+                document.getElementById('sidebar').classList.toggle('open');
+            });
+
+            // View toggles
+            document.getElementById('viewActivities').addEventListener('click', () => {
+                document.getElementById('activitiesView').classList.remove('hidden');
+                document.getElementById('profilesView').classList.add('hidden');
+                document.getElementById('viewActivities').classList.remove('btn-secondary');
+                document.getElementById('viewActivities').classList.add('btn-primary');
+                document.getElementById('viewProfiles').classList.remove('btn-primary');
+                document.getElementById('viewProfiles').classList.add('btn-secondary');
+            });
+
+            document.getElementById('viewProfiles').addEventListener('click', () => {
+                document.getElementById('profilesView').classList.remove('hidden');
+                document.getElementById('activitiesView').classList.add('hidden');
+                document.getElementById('viewProfiles').classList.remove('btn-secondary');
+                document.getElementById('viewProfiles').classList.add('btn-primary');
+                document.getElementById('viewActivities').classList.remove('btn-primary');
+                document.getElementById('viewActivities').classList.add('btn-secondary');
+                renderProfiles();
+            });
+
+            // File import
+            document.getElementById('importFile').addEventListener('change', handleImport);
+
+            // Export
+            document.getElementById('exportBtn').addEventListener('click', exportAll);
+
+            // Generate index
+            document.getElementById('generateIndexBtn').addEventListener('click', generateIndex);
+
+            // Add activity
+            document.getElementById('addActivityBtn').addEventListener('click', () => {
+                state.currentActivity = null;
+                openActivityModal();
+            });
+
+            // Add profile
+            document.getElementById('addProfileBtn').addEventListener('click', () => {
+                state.currentProfile = null;
+                openProfileModal();
+            });
+
+            // Close modals
+            document.getElementById('closeModal').addEventListener('click', closeActivityModal);
+            document.getElementById('closeProfileModal').addEventListener('click', closeProfileModal);
+            document.getElementById('cancelBtn').addEventListener('click', closeActivityModal);
+            document.getElementById('cancelProfileBtn').addEventListener('click', closeProfileModal);
+
+            // Activity form
+            document.getElementById('activityForm').addEventListener('submit', handleActivitySubmit);
+            document.getElementById('deleteActivityBtn').addEventListener('click', handleActivityDelete);
+
+            // Profile form
+            document.getElementById('profileForm').addEventListener('submit', handleProfileSubmit);
+
+            // Intensity buttons
+            document.querySelectorAll('.intensity-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    document.querySelectorAll('.intensity-btn').forEach(b => {
+                        b.classList.remove('border-purple-500', 'bg-purple-500', 'bg-opacity-10');
+                    });
+                    btn.classList.add('border-purple-500', 'bg-purple-500', 'bg-opacity-10');
+                    document.getElementById('intensity').value = btn.dataset.intensity;
+                });
+            });
+
+            // Tag input
+            const tagInput = document.getElementById('tagInput');
+            tagInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    addTag(tagInput.value.trim());
+                    tagInput.value = '';
+                }
+            });
+
+            // Add buttons
+            document.getElementById('addAssetBtn').addEventListener('click', () => addListItem('assetsList', 'asset'));
+            document.getElementById('addStepBtn').addEventListener('click', () => addListItem('stepsList', 'step'));
+
+            // Filters
+            document.getElementById('searchInput').addEventListener('input', (e) => {
+                state.filters.search = e.target.value;
+                renderActivities();
+            });
+
+            document.getElementById('filterIntensity').addEventListener('change', (e) => {
+                state.filters.intensity = e.target.value;
+                renderActivities();
+            });
+
+            document.getElementById('filterTag').addEventListener('change', (e) => {
+                state.filters.tag = e.target.value;
+                renderActivities();
+            });
+
+            document.getElementById('clearFilters').addEventListener('click', () => {
+                state.filters = { search: '', intensity: '', tag: '' };
+                document.getElementById('searchInput').value = '';
+                document.getElementById('filterIntensity').value = '';
+                document.getElementById('filterTag').value = '';
+                renderActivities();
+            });
+
+            // Energy profile sliders
+            ['morning', 'afternoon', 'evening', 'night'].forEach(time => {
+                const slider = document.getElementById(`energy${time.charAt(0).toUpperCase() + time.slice(1)}`);
+                const valueSpan = document.getElementById(`${time}Value`);
+                slider?.addEventListener('input', (e) => {
+                    valueSpan.textContent = e.target.value;
+                });
+            });
+        }
+
+        // Import/Export Functions
+        async function handleImport(e) {
+            const files = e.target.files;
+            
+            for (const file of files) {
+                try {
+                    const text = await file.text();
+                    const data = JSON.parse(text);
+
+                    // Detect file type
+                    if (Array.isArray(data)) {
+                        // Activities file
+                        state.activities = [...state.activities, ...data];
+                        showToast(`Importadas ${data.length} actividades de ${file.name}`, 'success');
+                    } else if (data.user_id) {
+                        // Profile file
+                        const existingIndex = state.profiles.findIndex(p => p.user_id === data.user_id);
+                        if (existingIndex >= 0) {
+                            state.profiles[existingIndex] = data;
+                        } else {
+                            state.profiles.push(data);
+                        }
+                        showToast(`Importado perfil: ${data.display_name}`, 'success');
+                    }
+                } catch (error) {
+                    showToast(`Error al importar ${file.name}: ${error.message}`, 'error');
+                }
+            }
+
+            renderActivities();
+            updateStats();
+            populateFilterTags();
+        }
+
+        function exportAll() {
+            // Export activities
+            if (state.activities.length > 0) {
+                downloadJSON(state.activities, 'activities_export.json');
+            }
+
+            // Export profiles
+            state.profiles.forEach(profile => {
+                downloadJSON(profile, `${profile.user_id}.json`);
+            });
+
+            showToast('Archivos exportados', 'success');
+        }
+
+        function generateIndex() {
+            const index = {
+                version: '1.0.0',
+                lastUpdated: new Date().toISOString().split('T')[0],
+                files: ['activities_core.json'],
+                categories: {
+                    core: 'Actividades principales de interior y entretenimiento'
+                }
+            };
+
+            downloadJSON(index, 'index.json');
+            showToast('Índice generado', 'success');
+        }
+
+        function downloadJSON(data, filename) {
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Activity Modal Functions
+        function openActivityModal() {
+            const modal = document.getElementById('activityModal');
+            modal.classList.add('active');
+
+            if (state.currentActivity) {
+                // Edit mode
+                document.getElementById('modalTitle').textContent = 'Editar Actividad';
+                document.getElementById('deleteActivityBtn').classList.remove('hidden');
+                populateActivityForm(state.currentActivity);
+            } else {
+                // Create mode
+                document.getElementById('modalTitle').textContent = 'Nueva Actividad';
+                document.getElementById('deleteActivityBtn').classList.add('hidden');
+                document.getElementById('activityForm').reset();
+                clearDynamicLists();
+            }
+
+            document.getElementById('validationErrors').classList.add('hidden');
+        }
+
+        function closeActivityModal() {
+            document.getElementById('activityModal').classList.remove('active');
+            state.currentActivity = null;
+        }
+
+        function populateActivityForm(activity) {
+            document.getElementById('activityId').value = activity.id;
+            document.getElementById('title').value = activity.title;
+            document.getElementById('description').value = activity.description;
+            document.getElementById('participants').value = activity.participants;
+            document.getElementById('minDuration').value = activity.min_duration_min;
+            document.getElementById('maxDuration').value = activity.max_duration_min;
+            document.getElementById('cost').value = activity.cost;
+
+            // Intensity
+            document.querySelectorAll('.intensity-btn').forEach(btn => {
+                btn.classList.remove('border-purple-500', 'bg-purple-500', 'bg-opacity-10');
+                if (btn.dataset.intensity == activity.intensity) {
+                    btn.classList.add('border-purple-500', 'bg-purple-500', 'bg-opacity-10');
+                }
+            });
+            document.getElementById('intensity').value = activity.intensity;
+
+            // Tags
+            clearTags();
+            activity.tags.forEach(tag => addTag(tag, false));
+
+            // Assets
+            const assetsList = document.getElementById('assetsList');
+            assetsList.innerHTML = '';
+            activity.required_assets.forEach(asset => {
+                addListItem('assetsList', 'asset', asset);
+            });
+
+            // Suitability
+            if (activity.suitability) {
+                document.querySelectorAll('.mood-check').forEach(cb => {
+                    cb.checked = activity.suitability.mood?.includes(cb.value) || false;
+                });
+                document.querySelectorAll('.time-check').forEach(cb => {
+                    cb.checked = activity.suitability.time_of_day?.includes(cb.value) || false;
+                });
+            }
+
+            // Steps
+            const stepsList = document.getElementById('stepsList');
+            stepsList.innerHTML = '';
+            if (activity.steps) {
+                activity.steps.forEach(step => {
+                    addListItem('stepsList', 'step', step);
+                });
+            }
+        }
+
+        function handleActivitySubmit(e) {
+            e.preventDefault();
+
+            const formData = getActivityFormData();
+            const errors = validateActivity(formData);
+
+            if (errors.length > 0) {
+                showValidationErrors(errors);
+                return;
+            }
+
+            if (state.currentActivity) {
+                // Update existing
+                const index = state.activities.findIndex(a => a.id === state.currentActivity.id);
+                state.activities[index] = formData;
+                showToast('Actividad actualizada', 'success');
+            } else {
+                // Add new
+                state.activities.push(formData);
+                showToast('Actividad creada', 'success');
+            }
+
+            renderActivities();
+            updateStats();
+            populateFilterTags();
+            closeActivityModal();
+        }
+
+        function handleActivityDelete() {
+            if (!confirm('¿Estás seguro de eliminar esta actividad?')) return;
+
+            state.activities = state.activities.filter(a => a.id !== state.currentActivity.id);
+            showToast('Actividad eliminada', 'success');
+            renderActivities();
+            updateStats();
+            closeActivityModal();
+        }
+
+        function getActivityFormData() {
+            const tags = Array.from(document.querySelectorAll('#tagContainer .removable-tag'))
+                .map(tag => tag.dataset.tag);
+
+            const assets = Array.from(document.querySelectorAll('#assetsList input'))
+                .map(input => input.value)
+                .filter(v => v.trim());
+
+            const steps = Array.from(document.querySelectorAll('#stepsList input'))
+                .map(input => input.value)
+                .filter(v => v.trim());
+
+            const moods = Array.from(document.querySelectorAll('.mood-check:checked'))
+                .map(cb => cb.value);
+
+            const timeOfDay = Array.from(document.querySelectorAll('.time-check:checked'))
+                .map(cb => cb.value);
+
+            const activity = {
+                id: document.getElementById('activityId').value.trim(),
+                title: document.getElementById('title').value.trim(),
+                description: document.getElementById('description').value.trim(),
+                tags: tags,
+                min_duration_min: parseInt(document.getElementById('minDuration').value),
+                max_duration_min: parseInt(document.getElementById('maxDuration').value),
+                intensity: parseInt(document.getElementById('intensity').value),
+                cost: parseFloat(document.getElementById('cost').value),
+                participants: parseInt(document.getElementById('participants').value),
+                required_assets: assets
+            };
+
+            if (moods.length > 0 || timeOfDay.length > 0) {
+                activity.suitability = {};
+                if (moods.length > 0) activity.suitability.mood = moods;
+                if (timeOfDay.length > 0) activity.suitability.time_of_day = timeOfDay;
+            }
+
+            if (steps.length > 0) {
+                activity.steps = steps;
+            }
+
+            return activity;
+        }
+
+        function validateActivity(activity) {
+            const errors = [];
+
+            // ID unique check
+            if (state.currentActivity?.id !== activity.id) {
+                if (state.activities.some(a => a.id === activity.id)) {
+                    errors.push('El ID ya existe en el dataset');
+                }
+            }
+
+            // Required fields
+            if (!activity.id) errors.push('ID es requerido');
+            if (!activity.title) errors.push('Título es requerido');
+            if (!activity.description) errors.push('Descripción es requerida');
+
+            // Tags validation
+            if (activity.tags.length < 3) {
+                errors.push('Se requieren al menos 3 tags');
+            }
+
+            // Duration validation
+            if (activity.min_duration_min >= activity.max_duration_min) {
+                errors.push('La duración mínima debe ser menor que la máxima');
+            }
+
+            // Cost validation
+            if (activity.cost < 0) {
+                errors.push('El costo no puede ser negativo');
+            }
+
+            // Intensity validation
+            if (![0, 1, 2].includes(activity.intensity)) {
+                errors.push('Intensidad debe ser 0, 1 o 2');
+            }
+
+            return errors;
+        }
+
+        function showValidationErrors(errors) {
+            const container = document.getElementById('validationErrors');
+            const list = document.getElementById('errorList');
+            
+            list.innerHTML = errors.map(err => `<li>${err}</li>`).join('');
+            container.classList.remove('hidden');
+            
+            // Scroll to top
+            document.querySelector('.modal-content').scrollTop = 0;
+        }
+
+        // Tag Functions
+        function renderSuggestedTags() {
+            const container = document.getElementById('suggestedTags');
+            container.innerHTML = STANDARD_TAGS
+                .map(tag => `<button type="button" class="tag-badge cursor-pointer hover:bg-opacity-20" onclick="addTag('${tag}')">${tag}</button>`)
+                .join('');
+        }
+
+        function addTag(tag, checkDuplicate = true) {
+            if (!tag) return;
+            
+            const container = document.getElementById('tagContainer');
+            const input = document.getElementById('tagInput');
+            
+            // Check for duplicates
+            if (checkDuplicate) {
+                const existing = Array.from(container.querySelectorAll('.removable-tag'))
+                    .map(t => t.dataset.tag);
+                if (existing.includes(tag)) {
+                    showToast('Tag ya agregado', 'error');
+                    return;
+                }
+            }
+            
+            const tagElement = document.createElement('div');
+            tagElement.className = 'removable-tag';
+            tagElement.dataset.tag = tag;
+            tagElement.innerHTML = `
+                ${tag}
+                <button type="button" class="remove-tag-btn" onclick="removeTag(this)">×</button>
+            `;
+            
+            container.insertBefore(tagElement, input);
+        }
+
+        function removeTag(btn) {
+            btn.closest('.removable-tag').remove();
+        }
+
+        function clearTags() {
+            const container = document.getElementById('tagContainer');
+            const tags = container.querySelectorAll('.removable-tag');
+            tags.forEach(tag => tag.remove());
+        }
+
+        // List Item Functions
+        function addListItem(listId, type, value = '') {
+            const list = document.getElementById(listId);
+            const item = document.createElement('div');
+            item.className = 'list-item';
+            item.innerHTML = `
+                <span class="drag-handle">⋮⋮</span>
+                <input type="text" class="input-field flex-1" placeholder="${type === 'asset' ? 'Ej: Pantalla, Internet' : 'Ej: Preparar ingredientes'}" value="${value}">
+                <button type="button" class="btn btn-danger" onclick="removeListItem(this)">×</button>
+            `;
+            list.appendChild(item);
+        }
+
+        function removeListItem(btn) {
+            btn.closest('.list-item').remove();
+        }
+
+        function clearDynamicLists() {
+            document.getElementById('assetsList').innerHTML = '';
+            document.getElementById('stepsList').innerHTML = '';
+            clearTags();
+        }
+
+        // Profile Functions
+        function openProfileModal() {
+            const modal = document.getElementById('profileModal');
+            modal.classList.add('active');
+
+            if (state.currentProfile) {
+                populateProfileForm(state.currentProfile);
+            } else {
+                document.getElementById('profileForm').reset();
+            }
+        }
+
+        function closeProfileModal() {
+            document.getElementById('profileModal').classList.remove('active');
+            state.currentProfile = null;
+        }
+
+        function populateProfileForm(profile) {
+            document.getElementById('profileUserId').value = profile.user_id;
+            document.getElementById('profileDisplayName').value = profile.display_name;
+
+            // Energy profile
+            if (profile.energy_profile) {
+                document.getElementById('energyMorning').value = profile.energy_profile.morning || 0.5;
+                document.getElementById('morningValue').textContent = profile.energy_profile.morning || 0.5;
+                document.getElementById('energyAfternoon').value = profile.energy_profile.afternoon || 0.8;
+                document.getElementById('afternoonValue').textContent = profile.energy_profile.afternoon || 0.8;
+                document.getElementById('energyEvening').value = profile.energy_profile.evening || 0.9;
+                document.getElementById('eveningValue').textContent = profile.energy_profile.evening || 0.9;
+                document.getElementById('energyNight').value = profile.energy_profile.night || 0.7;
+                document.getElementById('nightValue').textContent = profile.energy_profile.night || 0.7;
+            }
+
+            // Preferences
+            if (profile.preferences) {
+                document.getElementById('prefLocation').value = profile.preferences.preferred_location || 'indoor';
+                document.getElementById('prefSocial').value = profile.preferences.social_preference || 'intimate';
+                
+                // Set multiple select
+                const intensitySelect = document.getElementById('prefIntensity');
+                Array.from(intensitySelect.options).forEach(opt => {
+                    opt.selected = profile.preferences.preferred_intensity?.includes(parseInt(opt.value));
+                });
+            }
+        }
+
+        function handleProfileSubmit(e) {
+            e.preventDefault();
+
+            const profileData = {
+                user_id: document.getElementById('profileUserId').value.trim(),
+                display_name: document.getElementById('profileDisplayName').value.trim(),
+                inferred_tags: state.currentProfile?.inferred_tags || {},
+                explicit_likes: state.currentProfile?.explicit_likes || [],
+                explicit_dislikes: state.currentProfile?.explicit_dislikes || [],
+                energy_profile: {
+                    morning: parseFloat(document.getElementById('energyMorning').value),
+                    afternoon: parseFloat(document.getElementById('energyAfternoon').value),
+                    evening: parseFloat(document.getElementById('energyEvening').value),
+                    night: parseFloat(document.getElementById('energyNight').value)
+                },
+                preferences: {
+                    preferred_intensity: Array.from(document.getElementById('prefIntensity').selectedOptions)
+                        .map(opt => parseInt(opt.value)),
+                    preferred_location: document.getElementById('prefLocation').value,
+                    social_preference: document.getElementById('prefSocial').value
+                }
+            };
+
+            if (state.currentProfile) {
+                const index = state.profiles.findIndex(p => p.user_id === state.currentProfile.user_id);
+                state.profiles[index] = profileData;
+                showToast('Perfil actualizado', 'success');
+            } else {
+                state.profiles.push(profileData);
+                showToast('Perfil creado', 'success');
+            }
+
+            renderProfiles();
+            closeProfileModal();
+        }
+
+        // Render Functions
+        function renderActivities() {
+            const grid = document.getElementById('activitiesGrid');
+            const emptyState = document.getElementById('emptyState');
+
+            let filtered = [...state.activities];
+
+            // Apply filters
+            if (state.filters.search) {
+                const search = state.filters.search.toLowerCase();
+                filtered = filtered.filter(a => 
+                    a.title.toLowerCase().includes(search) ||
+                    a.description.toLowerCase().includes(search) ||
+                    a.tags.some(t => t.toLowerCase().includes(search))
+                );
+            }
+
+            if (state.filters.intensity !== '') {
+                filtered = filtered.filter(a => a.intensity === parseInt(state.filters.intensity));
+            }
+
+            if (state.filters.tag) {
+                filtered = filtered.filter(a => a.tags.includes(state.filters.tag));
+            }
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+
+            grid.innerHTML = filtered.map(activity => `
+                <div class="activity-card" onclick="editActivity('${activity.id}')">
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="font-semibold text-lg">${activity.title}</h3>
+                        <span class="intensity-badge intensity-${activity.intensity}">
+                            ${['Baja', 'Media', 'Alta'][activity.intensity]}
+                        </span>
+                    </div>
+                    <p class="text-sm text-dark-textMuted mb-3 line-clamp-2">${activity.description}</p>
+                    <div class="flex items-center gap-3 text-xs text-dark-textMuted mb-3">
+                        <span>⏱️ ${activity.min_duration_min}-${activity.max_duration_min} min</span>
+                        <span>💰 $${activity.cost}</span>
+                        <span>👥 ${activity.participants}</span>
+                    </div>
+                    <div class="flex flex-wrap gap-1">
+                        ${activity.tags.slice(0, 5).map(tag => `<span class="tag-badge">${tag}</span>`).join('')}
+                        ${activity.tags.length > 5 ? `<span class="tag-badge">+${activity.tags.length - 5}</span>` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderProfiles() {
+            const grid = document.getElementById('profilesGrid');
+
+            if (state.profiles.length === 0) {
+                grid.innerHTML = '<div class="empty-state"><p>No hay perfiles creados</p></div>';
+                return;
+            }
+
+            grid.innerHTML = state.profiles.map(profile => `
+                <div class="activity-card" onclick="editProfile('${profile.user_id}')">
+                    <h3 class="font-semibold text-lg mb-2">${profile.display_name}</h3>
+                    <p class="text-sm text-dark-textMuted mb-3">@${profile.user_id}</p>
+                    <div class="space-y-2">
+                        <div class="text-xs">
+                            <span class="text-dark-textMuted">Top Tags:</span>
+                            ${Object.entries(profile.inferred_tags || {})
+                                .sort(([,a], [,b]) => b - a)
+                                .slice(0, 3)
+                                .map(([tag, score]) => `<span class="tag-badge">${tag} ${(score * 100).toFixed(0)}%</span>`)
+                                .join('')}
+                        </div>
+                        <div class="text-xs text-dark-textMuted">
+                            📍 ${profile.preferences?.preferred_location || 'N/A'} · 
+                            ⚡ Intensidad ${profile.preferences?.preferred_intensity?.join(', ') || 'N/A'}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function editActivity(id) {
+            state.currentActivity = state.activities.find(a => a.id === id);
+            openActivityModal();
+        }
+
+        function editProfile(userId) {
+            state.currentProfile = state.profiles.find(p => p.user_id === userId);
+            openProfileModal();
+        }
+
+        function updateStats() {
+            document.getElementById('activityCount').textContent = state.activities.length;
+        }
+
+        function populateFilterTags() {
+            const select = document.getElementById('filterTag');
+            const allTags = new Set();
+            state.activities.forEach(a => a.tags.forEach(t => allTags.add(t)));
+            
+            select.innerHTML = '<option value="">Todos los tags</option>' +
+                Array.from(allTags).sort()
+                    .map(tag => `<option value="${tag}">${tag}</option>`)
+                    .join('');
+        }
+
+        // Toast Notifications
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.animation = 'slideIn 0.3s ease reverse';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
