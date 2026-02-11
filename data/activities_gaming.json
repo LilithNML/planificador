@@ -1,0 +1,219 @@
+[
+  {
+    "id": "gam_001",
+    "title": "Expedición Cooperativa en Teyvat/New Eridu",
+    "description": "Sesión de farmeo o exploración en Genshin Impact o ZZZ. Uno ayuda al otro con jefes o a buscar cofres pendientes.",
+    "tags": ["gaming", "coop", "hoyoverse", "casual"],
+    "min_duration_min": 40,
+    "max_duration_min": 60,
+    "intensity": 1,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["Genshin Impact o ZZZ", "Smartphone/Laptop/Xbox"],
+    "suitability": {
+      "mood": ["calm", "fun"],
+      "time_of_day": ["afternoon", "evening"]
+    },
+    "steps": [
+      "Entrar al mundo del jugador con nivel más bajo.",
+      "Marcar 3 objetivos en el mapa (jefes, dominios o puzzles).",
+      "Ir comentando por el chat del juego las reacciones a los ataques.",
+      "Al terminar, tomarse una foto (screenshot) de sus personajes juntos."
+    ]
+  },
+  {
+    "id": "gam_002",
+    "title": "Duelo de Geografía: Mundo Visual",
+    "description": "Partida de GeoGuessr o City Guesser. Ideal para la curiosidad de Lilith y la calma de Haziel.",
+    "tags": ["gaming", "browser-game", "intellectual", "coop"],
+    "min_duration_min": 15,
+    "max_duration_min": 30,
+    "intensity": 1,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["Navegador Web", "WhatsApp"],
+    "suitability": {
+      "mood": ["intellectual", "calm"],
+      "time_of_day": ["morning", "afternoon"]
+    },
+    "steps": [
+      "Crear una sala privada en GeoGuessr (o compartir pantalla de uno solo).",
+      "Analizar juntos los detalles: ¿Qué dice ese cartel? ¿De qué lado conducen?",
+      "Debatir por WhatsApp antes de marcar el punto en el mapa.",
+      "Celebrar si quedan a menos de 100km del objetivo."
+    ]
+  },
+  {
+    "id": "gam_003",
+    "title": "Arquitectos de un Mundo Cuadrado",
+    "description": "Entrar a su mundo de Minecraft para trabajar en un proyecto de construcción conjunto.",
+    "tags": ["gaming", "minecraft", "creative", "coop"],
+    "min_duration_min": 60,
+    "max_duration_min": 120,
+    "intensity": 0,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["Minecraft", "Xbox/Mobile/Laptop"],
+    "suitability": {
+      "mood": ["calm", "creative"],
+      "time_of_day": ["evening", "night"]
+    },
+    "steps": [
+      "Definir el proyecto de hoy: ¿Un castillo? ¿Un jardín? ¿Una granja?",
+      "Haziel se encarga de la recolección de materiales pesados.",
+      "Lilith se encarga del diseño y la decoración interior.",
+      "Enviarse fotos del progreso por WhatsApp cada 20 minutos."
+    ]
+  },
+  {
+    "id": "gam_004",
+    "title": "Stream Privado (Modo Comentarista)",
+    "description": "Uno juega un modo historia o un nivel difícil mientras comparte pantalla y el otro actúa como el 'chat del streamer'.",
+    "tags": ["gaming", "entertainment", "playful", "chill"],
+    "min_duration_min": 30,
+    "max_duration_min": 60,
+    "intensity": 1,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["Discord para compartir pantalla", "GeForce Now"],
+    "suitability": {
+      "mood": ["fun", "tired"],
+      "time_of_day": ["night"]
+    },
+    "steps": [
+      "Elegir quién será el 'Pro' (Haziel) y quién el 'Viewer' (Lilith).",
+      "Iniciar la transmisión.",
+      "El espectador debe escribir ánimos, teorías y bromas por el chat sin parar.",
+      "Intercambiar roles a la mitad o en la siguiente sesión."
+    ]
+  },
+  {
+    "id": "gam_005",
+    "title": "Desafío GeForce Now: ¡Contra el Reloj!",
+    "description": "Aprovechar la hora gratuita de GeForce Now para cumplir un reto rápido en un juego de alta gama.",
+    "tags": ["gaming", "technology", "fast-paced", "pro"],
+    "min_duration_min": 45,
+    "max_duration_min": 60,
+    "intensity": 2,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["GeForce Now", "Juego compatible"],
+    "suitability": {
+      "mood": ["energetic"],
+      "time_of_day": ["afternoon"]
+    },
+    "steps": [
+      "Ambos inician sesión al mismo tiempo para entrar en la cola de espera.",
+      "El objetivo es terminar una misión o ganar una partida de Fortnite antes de que se acabe la hora.",
+      "Reportar el tiempo restante cada 15 min por WhatsApp.",
+      "Si los desconecta, la sesión termina con un 'Debriefing' de lo logrado."
+    ]
+  },
+  {
+    "id": "gam_006",
+    "title": "Fortnite: Solo Creativo y Chill",
+    "description": "Evitar el Battle Royale estresante. Entrar a mapas de parkour fácil, escape rooms, cero construcción o mapas de arte.",
+    "tags": ["gaming", "fortnite", "casual", "creative"],
+    "min_duration_min": 30,
+    "max_duration_min": 60,
+    "intensity": 1,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["Fortnite (Xbox/GFN/Mobile)"],
+    "suitability": {
+      "mood": ["fun", "calm"],
+      "time_of_day": ["afternoon", "evening"]
+    },
+    "steps": [
+      "Buscar un código de mapa 'Coop Escape Room' o 'Deathrun Easy'.",
+      "Haziel guía en las partes técnicas, Lilith ayuda con los acertijos visuales.",
+      "Usar los gestos (emotes) del juego para comunicarse (baile = victoria, facepalm = error)."
+    ]
+  },
+  {
+    "id": "gam_007",
+    "title": "Momento de Mini-juegos de Navegador",
+    "description": "Juegos rápidos que no requieren instalación. Tipo Gartic Phone, Skribbl.io o Codenames.",
+    "tags": ["gaming", "browser-game", "creative", "fun"],
+    "min_duration_min": 20,
+    "max_duration_min": 45,
+    "intensity": 1,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["Smartphone o Laptop", "Navegador"],
+    "suitability": {
+      "mood": ["fun", "playful"],
+      "time_of_day": ["any"]
+    },
+    "steps": [
+      "Entrar a una sala de Gartic Phone (modo 2 jugadores si es posible) o Skribbl.",
+      "Dibujarse el uno al otro o conceptos internos de su relación.",
+      "Tener el chat de WhatsApp abierto para reírse de los dibujos deformes."
+    ]
+  },
+  {
+    "id": "gam_008",
+    "title": "Competencia de Juegos 'Plato' (Mobile)",
+    "description": "Usar la app Plato para jugar billar, mini-golf o cartas por turnos.",
+    "tags": ["gaming", "mobile", "casual", "competition"],
+    "min_duration_min": 15,
+    "max_duration_min": 40,
+    "intensity": 1,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["App Plato (Android)"],
+    "suitability": {
+      "mood": ["calm", "fun"],
+      "time_of_day": ["morning", "night"]
+    },
+    "steps": [
+      "Elegir un juego clásico (Ajedrez, Damas, Billar).",
+      "Jugar mientras se cuentan cómo estuvo su día por el chat de la app.",
+      "El que pierda 3 partidas seguidas debe enviar un cumplido especial al otro."
+    ]
+  },
+  {
+    "id": "gam_009",
+    "title": "Búsqueda de 'Modas' de Juegos",
+    "description": "Investigar juntos un juego nuevo que esté en tendencia y sea gratis para sus plataformas.",
+    "tags": ["gaming", "research", "technology", "intellectual"],
+    "min_duration_min": 20,
+    "max_duration_min": 40,
+    "intensity": 0,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["YouTube/Store", "WhatsApp"],
+    "suitability": {
+      "mood": ["intellectual"],
+      "time_of_day": ["morning", "afternoon"]
+    },
+    "steps": [
+      "Cada uno busca un juego 'Free to Play' con buenas reseñas.",
+      "Enviarse el trailer por WhatsApp.",
+      "Debatirse pros y contras: ¿Lilith lo entiende rápido? ¿Haziel puede ser pro?",
+      "Si ambos dicen sí, ponerlo a descargar para el próximo plan."
+    ]
+  },
+  {
+    "id": "gam_010",
+    "title": "Genshin Impact: Sesión de Fotos Profunda",
+    "description": "En lugar de pelear, buscar los lugares más bellos de Fontaine o Inazuma para hacer una sesión de fotos artística.",
+    "tags": ["gaming", "art", "hoyoverse", "romantic"],
+    "min_duration_min": 30,
+    "max_duration_min": 50,
+    "intensity": 0,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["Genshin Impact"],
+    "suitability": {
+      "mood": ["romantic", "calm"],
+      "time_of_day": ["evening", "night"]
+    },
+    "steps": [
+      "Viajar a un punto con buena vista al atardecer in-game.",
+      "Usar el modo foto para capturar a sus personajes en poses que combinen.",
+      "Editar las fotos con algún filtro o IA.",
+      "Compartirlas y poner una como fondo de pantalla."
+    ]
+  }
+]
