@@ -204,14 +204,14 @@
     "intensity": 0,
     "cost": 0,
     "participants": 2,
-    "required_assets": ["Papel y lápiz"],
+    "required_assets": ["Gmail"],
     "suitability": {
       "mood": ["romantic", "calm"],
       "time_of_day": ["night"]
     },
     "steps": [
       "Escribir una carta expresando qué es lo que más extrañan del otro hoy.",
-      "Enviar carta mediante página web 'FutureMe'.",
+      "Enviar carta mediante Gmail con envio programado para 7 días.",
       "Prometer no decir qué dice la carta hasta el día de la apertura."
     ]
   }
