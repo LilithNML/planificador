@@ -4,11 +4,13 @@
   "files": [
     "activities_anime.json",
     "activities_gaming.json",
-    "activities_creative.json"
+    "activities_creative.json",
+    "activities_talks.json"
   ],
   "categories": {
     "anime": "Actividades y dinámicas de visionado de anime",
     "gaming": "Videojuegos cooperativos y retos digitales",
-    "creative": "Retos creativos, escritura y dinámicas con Samuel"
+    "creative": "Retos creativos, escritura y dinámicas con Samuel",
+    "talks": "Conversaciónes, y momentos graciosos"
   }
 }
