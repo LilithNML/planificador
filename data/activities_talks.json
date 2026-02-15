@@ -1,0 +1,222 @@
+[
+  {
+    "id": "tlk_001",
+    "title": "Debate de Lore: ¿Quién ganaría?",
+    "description": "Un enfrentamiento hipotético entre personajes de sus animes o juegos favoritos (Genshin, ZZZ, etc.).",
+    "tags": ["talk", "lore", "playful", "intellectual"],
+    "min_duration_min": 15,
+    "max_duration_min": 30,
+    "intensity": 1,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["WhatsApp"],
+    "suitability": {
+      "mood": ["fun", "energetic"],
+      "time_of_day": ["afternoon", "evening"]
+    },
+    "steps": [
+      "Uno elige un personaje A y el otro un personaje B.",
+      "Pongan un escenario (ej. 'una pelea en el desierto' o 'una competencia de cocina').",
+      "Cada uno da un argumento corto de por qué su personaje gana.",
+      "Deben refutar el argumento del otro con una sola frase hasta que uno se rinda."
+    ]
+  },
+  {
+    "id": "tlk_002",
+    "title": "La Universidad de Samuel",
+    "description": "Planear el futuro académico y profesional de su Samuel con total seriedad... y mucha risa.",
+    "tags": ["talk", "samuel", "playful", "creative"],
+    "min_duration_min": 20,
+    "max_duration_min": 40,
+    "intensity": 0,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["Samuel"],
+    "suitability": {
+      "mood": ["fun", "calm"],
+      "time_of_day": ["any"]
+    },
+    "steps": [
+      "Debatamos: ¿Samuel es más de ciencias o de artes?",
+      "Escriban paso a paso qué carrera estudiaría y cuál sería su primer trabajo.",
+      "Discutan quién de los dos sería el 'padre estricto' con sus calificaciones.",
+      "Terminen decidiendo qué hará Samuel con su primer sueldo."
+    ]
+  },
+  {
+    "id": "tlk_003",
+    "title": "Preguntas 'Incómodas' para Conocernos",
+    "description": "Preguntas directas para profundizar en su forma de ser. Puede ser un poco revelador, pero divertido.",
+    "tags": ["talk", "connection", "intellectual", "vulnerability"],
+    "min_duration_min": 30,
+    "max_duration_min": 60,
+    "intensity": 1,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["WhatsApp"],
+    "suitability": {
+      "mood": ["calm", "intellectual"],
+      "time_of_day": ["night"]
+    },
+    "steps": [
+      "Regla: Solo mensajes cortos. No vale dar respuestas largas.",
+      "Turnos para preguntar: '¿Qué es lo que más te asusta del futuro?' o '¿Qué manía mía te desespera un poco?'.",
+      "Si una pregunta es 'demasiado' profunda, pueden usar un comodín de 'Paso'.",
+      "Sean honestos pero mantengan el humor con stickers."
+    ]
+  },
+  {
+    "id": "tlk_004",
+    "title": "El Abogado del Diablo: Versión Ligera",
+    "description": "Llevarse la contraria en temas absurdos y sin importancia.",
+    "tags": ["talk", "debate", "playful", "contrarian"],
+    "min_duration_min": 15,
+    "max_duration_min": 25,
+    "intensity": 1,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["WhatsApp"],
+    "suitability": {
+      "mood": ["fun", "energetic"],
+      "time_of_day": ["afternoon"]
+    },
+    "steps": [
+      "Elijan un tema tonto (ej. '¿El cereal va antes o después de la leche?').",
+      "Uno debe defender una postura y el otro la contraria, aunque no lo crea de verdad.",
+      "Vale usar gifs y fotos para 'desarmar' el argumento del otro.",
+      "Gana quien consiga que el otro se ría."
+    ]
+  },
+  {
+    "id": "tlk_005",
+    "title": "What If: Nuestra Vida en un Anime",
+    "description": "Si su relación fuera un anime de temporada, ¿cómo se desarrollaría el guion?",
+    "tags": ["talk", "anime", "creative", "connection"],
+    "min_duration_min": 20,
+    "max_duration_min": 45,
+    "intensity": 1,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["Conocimiento otaku"],
+    "suitability": {
+      "mood": ["fun", "playful"],
+      "time_of_day": ["evening", "night"]
+    },
+    "steps": [
+      "Definan quién es el protagonista despistado y quién el 'tsundere'.",
+      "Debatan cuál sería el 'conflicto' del episodio de hoy.",
+      "Escriban paso a paso cómo sería la escena del reencuentro final de la temporada.",
+      "Pónganle un título al anime."
+    ]
+  },
+  {
+    "id": "tlk_006",
+    "title": "Confesiones de la Infancia",
+    "description": "Compartir esas historias raras o ridículas que hicieron de niños.",
+    "tags": ["talk", "connection", "nostalgia", "funny"],
+    "min_duration_min": 25,
+    "max_duration_min": 50,
+    "intensity": 0,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["WhatsApp", "Memoria"],
+    "suitability": {
+      "mood": ["calm", "fun"],
+      "time_of_day": ["night"]
+    },
+    "steps": [
+      "Uno cuenta una travesura o algo raro que creía de niño.",
+      "El otro debe intentar adivinar si es verdad o mentira antes de que se revele el final.",
+      "Intercambien fotos de pequeños si tienen alguna a la mano.",
+      "Comparen quién era más rebelde."
+    ]
+  },
+  {
+    "id": "tlk_007",
+    "title": "Junta de Padres de Samuel",
+    "description": "Debatir reglas y educación para Samuel de una forma seria y divertida.",
+    "tags": ["talk", "samuel", "playful", "romantic"],
+    "min_duration_min": 15,
+    "max_duration_min": 30,
+    "intensity": 0,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["Samuel", "WhatsApp"],
+    "suitability": {
+      "mood": ["calm", "playful"],
+      "time_of_day": ["morning", "evening"]
+    },
+    "steps": [
+      "Tema de la junta: '¿A qué hora debe dormir Samuel?'.",
+      "Cada uno propone una regla para su educación.",
+      "Lleven la contraria de forma graciosa (ej. 'No, Samuel tiene que ser gamer profesional').",
+      "Lleguen a un acuerdo y anótenlo como 'Ley de la casa'."
+    ]
+  },
+  {
+    "id": "tlk_008",
+    "title": "Debate de Teorías Locas (Lore)",
+    "description": "Analizar teorías conspirativas sobre los juegos que juegan.",
+    "tags": ["talk", "lore", "intellectual", "gaming"],
+    "min_duration_min": 20,
+    "max_duration_min": 45,
+    "intensity": 1,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["WhatsApp"],
+    "suitability": {
+      "mood": ["intellectual"],
+      "time_of_day": ["afternoon", "evening"]
+    },
+    "steps": [
+      "Uno lanza una teoría loca (ej. 'Paimon es el jefe final').",
+      "El otro debe dar un punto a favor y un punto en contra basado en el lore.",
+      "Mensajes cortos.",
+      "Voten si la teoría es 'Posible' o 'Delirio total'."
+    ]
+  },
+  {
+    "id": "tlk_009",
+    "title": "El Test de la Supervivencia",
+    "description": "¿Cómo sobrevivirían a un apocalipsis específico?",
+    "tags": ["talk", "hypothetical", "playful", "action"],
+    "min_duration_min": 20,
+    "max_duration_min": 40,
+    "intensity": 1,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["WhatsApp"],
+    "suitability": {
+      "mood": ["energetic", "fun"],
+      "time_of_day": ["afternoon", "night"]
+    },
+    "steps": [
+      "Elijan el apocalipsis: ¿Zombies, aliens o robots?",
+      "Definan roles: ¿Quién busca comida y quién defiende la base?",
+      "Debatan un plan de escape paso a paso.",
+      "Sean realistas: ¿Quién de los dos moriría primero por un descuido tonto?"
+    ]
+  },
+  {
+    "id": "tlk_010",
+    "title": "Preguntas Flash: Esto o Aquello",
+    "description": "Ronda rápida de preferencias para conocer gustos específicos sin dar vueltas.",
+    "tags": ["talk", "quick", "connection", "fun"],
+    "min_duration_min": 10,
+    "max_duration_min": 20,
+    "intensity": 1,
+    "cost": 0,
+    "participants": 2,
+    "required_assets": ["WhatsApp"],
+    "suitability": {
+      "mood": ["any"],
+      "time_of_day": ["morning", "any"]
+    },
+    "steps": [
+      "Lilith lanza 5 pares de opciones rápido (ej. 'Frío o calor', 'PC o Consola').",
+      "Haziel responde al instante.",
+      "Haziel devuelve 5 pares de opciones a Lilith.",
+      "Comenten brevemente si alguna respuesta les sorprendió o si quieren 'discutir' una de ellas."
+    ]
+  }
+]
